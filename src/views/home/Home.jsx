@@ -1,4 +1,5 @@
 import React from "react";
+import './App.css';
 import { Container, Grid, Image } from 'semantic-ui-react';
 
 export default function Home () {
