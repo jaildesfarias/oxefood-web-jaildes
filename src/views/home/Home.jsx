@@ -1,4 +1,4 @@
-git import React from "react";
+import React from "react";
 import { Container, Grid, Image } from 'semantic-ui-react';
 
 export default function Home () {
