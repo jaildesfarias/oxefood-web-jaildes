@@ -1,8 +1,8 @@
+import InputMask from 'comigo-tech-react-input-mask';
 import React from "react";
-import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 
-export default function FormCliente () {
+export default function FormEntergador() {
 
     return (
 
