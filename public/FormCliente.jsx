@@ -1,6 +1,16 @@
+import React from 'react'
+import { Pagination } from 'semantic-ui-react'
+import PaginationExamplePagination from './components/PaginationExamplePagination';
+
 import InputMask from 'comigo-tech-react-input-mask';
 import React from "react";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
+import { Pagination } from 'semantic-ui-react'
+
+import { Segment } from 'semantic-ui-react';
+import './App.css';
+import FormCliente from './views/cliente/FormCliente';
+
 
 export default function FormCliente () {
 
@@ -113,4 +123,3 @@ export default function FormCliente () {
 
     );
 
-}
