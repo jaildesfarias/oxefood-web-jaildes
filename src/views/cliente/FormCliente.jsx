@@ -1,52 +1,65 @@
 import InputMask from 'comigo-tech-react-input-mask';
 import React from "react";
-import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
+import { Button, Container, Divider, Form, Icon, Segment } from 'semantic-ui-react';
+import '../../App.css';
 
 export default function FormCliente () {
 
     return (
-
         <div>
-
             <div style={{marginTop: '3%'}}>
-
                 <Container textAlign='justified' >
 
-                    <h2> <span style={{color: 'darkgray'}}> Cliente &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro </h2>
+                    <h2> 
+                      <span style={{color: 'darkgray'}}> 
+                        Cliente &nbsp;
+                        <Icon name='angle double right' size="small" /> 
+                      </span> 
+                      Cadastro 
+                    </h2>
 
                     <Divider />
 
                     <div style={{marginTop: '4%'}}>
-
                         <Form>
 
                             <Form.Group widths='equal'>
-
                                 <Form.Input
                                     required
                                     fluid
-                                    label=''
+                                    label='Nome'
                                     maxLength="100"
                                 />
 
                                 <Form.Input
                                     required
                                     fluid
-                                    label='CPF'>
+                                    label='CPF'
+                                >
                                     <InputMask
                                         required
                                         mask="999.999.999-99"
                                     /> 
                                 </Form.Input>
 
+                                <Form.Input
+                                    required
+                                    fluid
+                                    label='RG'
+                                >
+                                    <InputMask
+                                        required
+                                        mask="99.999.999-9"
+                                    />
+                                </Form.Input>
                             </Form.Group>
                             
                             <Form.Group>
-
                                 <Form.Input
                                     fluid
                                     label='Fone Celular'
-                                    width={6}>
+                                    width={6}
+                                >
                                     <InputMask 
                                         mask="(99) 9999.9999"
                                     /> 
@@ -55,7 +68,8 @@ export default function FormCliente () {
                                 <Form.Input
                                     fluid
                                     label='Fone Fixo'
-                                    width={6}>
+                                    width={6}
+                                >
                                     <InputMask 
                                         mask="(99) 9999.9999"
                                     /> 
@@ -72,13 +86,11 @@ export default function FormCliente () {
                                         placeholder="Ex: 20/03/1985"
                                     /> 
                                 </Form.Input>
-
                             </Form.Group>
                         
                         </Form>
                         
                         <div style={{marginTop: '4%'}}>
-
                             <Button
                                 type="button"
                                 inverted
@@ -102,15 +114,11 @@ export default function FormCliente () {
                                 <Icon name='save' />
                                 Salvar
                             </Button>
-
                         </div>
 
                     </div>
-                    
                 </Container>
             </div>
         </div>
-
     );
-
 }
