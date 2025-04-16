@@ -30,7 +30,6 @@ export default function FormProduto() {
                 />
               </Form.Group>
 
-              {/* Grupo: Descrição do Produto */}
               <Form.Group widths='equal'>
                 <Form.TextArea
                   label='Descrição'
@@ -38,7 +37,16 @@ export default function FormProduto() {
                 />
               </Form.Group>
 
-              <Form.Group widths='equal'>/* Grupo: Tempo de Entrega Mínimo */
+              <Form.Group widths='equal'>
+                <Form.Input
+                  required
+                  fluid
+                  label='Valor Unitário'
+                  maxLength="100"
+                />
+              </Form.Group>
+
+              <Form.Group widths='equal'>
                 <Form.Input
                   type="number"
                   label='Tempo de Entrega Mínimo (em Minutos)'
@@ -46,7 +54,7 @@ export default function FormProduto() {
                 />
               </Form.Group>
 
-              <Form.Group widths='equal'> /* Grupo: Tempo de Entrega Máximo */
+              <Form.Group widths='equal'>
                 <Form.Input
                   type="number"
                   label='Tempo de Entrega Máximo (em Minutos)'
@@ -54,7 +62,7 @@ export default function FormProduto() {
                 />
               </Form.Group>
 
-              <div style={{ marginTop: '4%' }}>/* Botões */
+              <div style={{ marginTop: '4%' }}>
                 <Button
                   type="button"
                   inverted
@@ -63,8 +71,8 @@ export default function FormProduto() {
                   labelPosition='left'
                   color='orange'
                 >
-                  <Icon name='reply' />
-                  Voltar
+                  <Icon name='arrow left' />
+                  Listar
                 </Button>
 
                 <Button
@@ -75,7 +83,7 @@ export default function FormProduto() {
                   color='blue'
                   floated='right'
                 >
-                  <Icon name='save' />
+                  <Icon name='check' />
                   Salvar
                 </Button>
               </div>
