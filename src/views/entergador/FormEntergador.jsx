@@ -16,7 +16,7 @@ export default function FormProduto() {
             <span style={{ color: 'darkgray' }}>
               Cliente &nbsp;<Icon name='angle double right' size="small" />
             </span>
-            Produto
+            Cadastro
           </h2>
 
           <Divider />
