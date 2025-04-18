@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
+import React, { useState } from "react";
 
 export default function FormProduto() {
+  
+  const [nome, setNome] = useState();
+   const [cpf, setCpf] = useState();
+   const [rg, setRg] = useState();
+   const [dataNascimento, setDataNascimento] = useState();
+   const [foneCelular, setFoneCelular] = useState();
+   const [foneFixo, setFoneFixo] = useState();
+
   const [ativo, setAtivo] = useState('');
 
   const handleAtivoChange = (e, { value }) => {
