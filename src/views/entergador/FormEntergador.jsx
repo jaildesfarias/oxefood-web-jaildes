@@ -23,7 +23,7 @@ export default function FormProduto() {
         <Container textAlign='justified'>
           <h2>
             <span style={{ color: 'darkgray' }}>
-              Cliente &nbsp;<Icon name='angle double right' size="small" />
+              Entrgador &nbsp;<Icon name='angle double right' size="small" />
             </span>
             Cadastro
           </h2>
@@ -33,56 +33,62 @@ export default function FormProduto() {
           <div style={{ marginTop: '4%' }}>
             <Form>
 
-              {/* Grupo: Nome, Código e Ativo */}
-              <Form.Group widths='equal'>
+              <Form.Group widths='equal'> {/* Grupo: Nome, Cpf e Rg */}
                 <Form.Input
                   fluid
                   label='Nome'
-                  placeholder='Digite o nome'
+                  placeholder=''
                 />
                 <Form.Input
                   fluid
-                  label='Código'
-                  placeholder='Digite o código'
+                  label='CFP'
+                  placeholder=''
                 />
-                <Form.Field>
-                  <label><strong>Ativo</strong></label>
-                  <Form.Group inline>
-                    <Form.Radio
-                      label='Sim'
-                      name='ativo'
-                      value='sim'
-                      checked={ativo === 'sim'}
-                      onChange={handleAtivoChange}
-                    />
-                    <Form.Radio
-                      label='Não'
-                      name='ativo'
-                      value='nao'
-                      checked={ativo === 'nao'}
-                      onChange={handleAtivoChange}
-                    />
-                  </Form.Group>
-                </Form.Field>
+                <Form.Input
+                  fluid
+                  label='RG'
+                  placeholder=''
+                />
               </Form.Group>
-
+              
               {/* Grupo: Título e Código do Produto */}
               <Form.Group widths='equal'>
-                <Form.TextArea
-                  label='Título'
-                  placeholder='Informe o título do produto'
+                <Form.Input
+                  fluid
+                  label='DTNascimento'
+                  placeholder='20/03/1985'
                 />
-                <Form.TextArea
-                  label='Código do Produto'
-                  placeholder='Informe o código do produto'
+                <Form.Input
+                  fluid
+                  label='Fone Celular'
+                  placeholder=''
                 />
-              </Form.Group>
-
-
+                <Form.Input
+                  fluid
+                  label='Fone Fixo'
+                  placeholder=''
+                />
+               <Form.Input
+                  fluid
+                  label='QTD Entregas Realizadas'
+                  placeholder=''
+                />
+                <Form.Input
+                  fluid
+                  label='Valor Por Frete'
+                  placeholder=''
+                />
+ </Form.Group>
+                
               <Form.Group widths='equal'>
-                <Form.TextArea
-                  label='Descrição'
+                <Form.Input
+                  fluid
+                  label='Rua '
                   placeholder='Informe descrição do produto'
+                />
+                <Form.TextArea
+                  label='Número '
+                  placeholder=''
                 />
               </Form.Group>
 
@@ -90,28 +96,64 @@ export default function FormProduto() {
                 <Form.Input
                   required
                   fluid
-                  label='Valor Unitário'
+                  label='Bairro'
                   maxLength="100"
                 />
-              </Form.Group>
-
-              {/* Grupo: Tempo de Entrega Mínimo */}
-              <Form.Group widths='equal'>
+                 <Form.Input
+                  required
+                  fluid
+                  label='Cidade'
+                  maxLength="100"
+                />
                 <Form.Input
-                  type="number"
-                  label='Tempo de Entrega Mínimo (em Minutos)'
-                  placeholder='30'
+                  required
+                  fluid
+                  label='CEP'
+                  maxLength=""
                 />
               </Form.Group>
 
-              {/* Grupo: Tempo de Entrega Máximo */}
               <Form.Group widths='equal'>
-                <Form.Input
-                  type="number"
-                  label='Tempo de Entrega Máximo (em Minutos)'
-                  placeholder='40'
+                 <Form.Input
+                  required
+                  fluid
+                  label='UP'
+                  placeholder='Selecione'
                 />
               </Form.Group>
+
+              <Form.Group widths='equal'>
+                <Form.Input
+                 <Form.Input
+                  fluid
+                  label='Complemento'
+                  placeholder=''
+                />
+              </Form.Group>
+                   <Form.Field>
+                  <label><strong>Ativo</strong></label>
+                  <Form.Group inline>
+                    <Form.Radio
+
+                      value='Ativo'
+                      checked={ativo === 'sim'}
+                      onChange={handleAtivoChange}
+                    />
+                    <Form.Radio
+                      label='Sim'
+                     
+                      value='sim'
+                      checked={ativo === 'sim'}
+                      onChange={handleAtivoChange}
+                    />
+                    <Form.Radio
+                      label='Não'
+                      
+                      value='nao'
+                      checked={ativo === 'nao'}
+                      onChange={handleAtivoChange}
+                    />
+                  </Form.Group>
 
               <div style={{ marginTop: '4%' }}>
                   
