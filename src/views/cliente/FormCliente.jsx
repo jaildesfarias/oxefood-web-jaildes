@@ -3,6 +3,9 @@ import InputMask from 'comigo-tech-react-input-mask';
 import React, { useState } from "react";
 import { Button, Container, Divider, Form, Icon, Segment } from 'semantic-ui-react';
 import '../../App.css';
+import InputMask from 'react-input-mask';
+
+import React, { useState } from "react";
 
 export default function FormCliente () {
     
