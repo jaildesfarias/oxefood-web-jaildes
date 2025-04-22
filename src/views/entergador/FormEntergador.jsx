@@ -1,3 +1,4 @@
+import InputMask from 'comigo-tech-react-input-mask';
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import React, { useState } from "react";
