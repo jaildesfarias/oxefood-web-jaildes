@@ -25,15 +25,15 @@ export default function FormProduto() {
                   placeholder='Informe o título do produto'
                 />
                 <Form.TextArea
-                  label='Código do Produto'
-                  placeholder='Informe o código do produto'
+                  label='codigo'
+                  placeholder='Informe o codigo do produto'
                 />
               </Form.Group>
 
               <Form.Group widths='equal'>
                 <Form.TextArea
-                  label='Descrição'
-                  placeholder='Informe descrição do produto'
+                  label='descricao'
+                  placeholder='Informe descricao do produto'
                 />
               </Form.Group>
 
