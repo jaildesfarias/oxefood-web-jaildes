@@ -1,6 +1,8 @@
 import InputMask from 'comigo-tech-react-input-mask';
-import React from "react";
-import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
+import React, { useState } from "react";
+import { Button, Container, Divider, Form, Icon, Segment } from 'semantic-ui-react';
+import '../../App.css';
+
 
 export default function FormProduto() {
   return (
