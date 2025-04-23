@@ -3,8 +3,6 @@ import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import React, { useState } from "react";
 
-
-
 export default function FormProduto() {
   
   const [nome, setNome] = useState();
