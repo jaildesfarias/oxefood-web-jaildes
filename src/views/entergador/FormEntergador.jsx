@@ -1,190 +1,221 @@
 import InputMask from 'comigo-tech-react-input-mask';
-import InputMask from 'react-input-mask';
+
+import React from "react";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
-import React, { useState } from "react";
+import '../../App.css';
+import { BrowserRouter } from "react-router-dom";
+import Rotas from './Rotas';
 
-export default function FormProduto() {
-  
-  const [nome, setNome] = useState();
-   const [cpf, setCpf] = useState();
-   const [rg, setRg] = useState();
-   const [dataNascimento, setDataNascimento] = useState();
-   const [foneCelular, setFoneCelular] = useState();
-   const [foneFixo, setFoneFixo] = useState();
+export default function FormEntregador() {
 
-  const [ativo, setAtivo] = useState('');
 
-  const handleAtivoChange = (e, { value }) => {
-    setAtivo(value);
-  };
 
-  return (
-    <div>
-      <div style={{ marginTop: '3%' }}>
-        <Container textAlign='justified'>
-          <h2>
-            <span style={{ color: 'darkgray' }}>
-              Entrgador &nbsp;<Icon name='angle double right' size="small" />
-            </span>
-            Cadastro
-          </h2>
 
-          <Divider />
+    return (
+        <div>
+            <div style={{ marginTop: '3%' }}>
+                <Container textAlign='justified' >
 
-          <div style={{ marginTop: '4%' }}>
-            <Form>
-              <Form.Group widths='equal'> {/* Grupo: Nome, Cpf e Rg */}
-                <Form.Input
-                  fluid
-                  label='Nome'
-                  placeholder
-                  value={nome}
-		            	onChange={e => 
-                  setNome(e.target.value)} 
-                />
-                <Form.Input
-                  fluid
-                  label='CFP'
-                  placeholder=''
-                />
-                <Form.Input
-                  fluid
-                  label='rg'
-                  placeholder=''
-                />
-              </Form.Group>
-              
-              <Form.Group widths='equal'>
-                <Form.Input
-                  fluid
-                  label='DTNascimento'
-                  placeholder='20/03/1985'
-                />
-                <Form.Input
-                  fluid
-                  label='Fone Celular'
-                  placeholder=''
-                />
-                <Form.Input
-                  fluid
-                  label='Fone Fixo'
-                  placeholder=''
-                />
-               <Form.Input
-                  fluid
-                  label='QTD Entregas Realizadas'
-                  placeholder=''
-                />
-                <Form.Input
-                  fluid
-                  label='Valor Por Frete'
-                  placeholder=''
-                />
-             </Form.Group>
-                
-              <Form.Group widths='equal'>
-                <Form.Input
-                  fluid
-                  label='Rua '
-                  placeholder=''
-                />
-                <Form.TextArea
-                  label='Número '
-                  placeholder=''
-                />
-              </Form.Group>
+                    <h2>
+                        <span style={{ color: 'darkgray' }}>
+                            Entregador &nbsp;
+                            <Icon name='angle double right' size="small" />
+                        </span>
+                        Cadastro
+                    </h2>
 
-              <Form.Group widths='equal'>
-                <Form.Input
-                  required
-                  fluid
-                  label='Bairro'
-                  maxLength=""
-                />
-                 <Form.Input
-                  required
-                  fluid
-                  label='Cidade'
-                  maxLength=""
-                />
-              </Form.Group>
+                    <Divider />
 
-              <Form.Group widths='equal'>
-                 <Form.Input
-                  required
-                  fluid
-                  label='UP'
-                  placeholder='Selecione'
-                />
-              </Form.Group>
+                    <div style={{ marginTop: '4%' }}>
+                        <Form>
 
-              <Form.Group widths='equal'>
-                 <Form.Input
-                  fluid
-                  label='Complemento'
-                  placeholder=''
-                />
-              </Form.Group>
-               <Form.Group widths='equal'>
-                   <Form.Field>
-                
-                <Form.Group inline>
-                  <Form.Radio
-                    label='Ativo'
-                    value='Ativo'
-                    checked={ativo === 'Ativo'}
-                    onChange={handleAtivoChange}
-                  /> 
+                            <Form.Group widths='equal'>
+                                <Form.Input
+                                    required
+                                    fluid
+                                    label='Nome'
+                                    maxLength="100"
+                                />
+
+                                <Form.Input
+                                    required
+                                    fluid
+                                    label='CPF'
+                                >
+                                    <InputMask
+                                        required
+                                        mask="999.999.999-99"
+                                    />
+                                </Form.Input>
+
+                                <Form.Input
+
+                                    fluid
+                                    label='RG'
+                                >
+                                    <InputMask
+                                        required
+                                        mask="99.999.999-9"
+                                    />
+                                </Form.Input>
+
+                            </Form.Group>
+
+                            <Form.Group>
+                                <Form.Input
+                                    fluid
+                                    label='Dt Nascimento'
+                                    width={6}
+                                >
+                                    <InputMask
+                                        placeholder="Ex:20/03/1985"
+                                    />
+                                </Form.Input>
+
+                                <Form.Input
+                                    fluid
+                                    label='Fone Celular'
+                                    width={6}
+                                >
+                                    <InputMask
+                                        mask="(99) 9999.9999"
+                                    />
+                                </Form.Input>
+                                <Form.Input
+                                    fluid
+                                    label='Fone fixo'
+                                    width={6}
+                                >
+                                    <InputMask
+                                        mask="(99) 9999.9999"
+                                    />
+                                </Form.Input>
+
+                                <Form.Input
+                                    fluid
+                                    label='QTD Entregas Realizadas'
+                                    width={6}
+                                >
+
+                                </Form.Input>
+
+                                <Form.Input
+                                    fluid
+                                    label='Valor Por Frete'
+                                    width={6}
+
+                                >
+
+                                </Form.Input>
+                            </Form.Group>
+                            <Form.Group widths='equal'>
+                            <Form.Input
+                                    fluid
+                                    label='Rua'
+                                    width={6}
+                                >
+
+                                </Form.Input>
+                                <Form.Input
+                                    fluid
+                                    label='Número'
+                                    width={6}
+                                >
+
+                                </Form.Input>
+
+                            </Form.Group>
+                            <Form.Group widths='equal'>
+                            <Form.Input
+                                    fluid
+                                    label='Bairro'
+                                    width={6}
+                                >
+
+                                </Form.Input>
+                                <Form.Input
+                                    fluid
+                                    label='Cidade'
+                                    width={6}
+                                >
+
+                                </Form.Input>
+                                <Form.Input
+                                    fluid
+                                    label='CEP'
+                                    width={6}
+                                >
+
+                                </Form.Input>
+
+                            </Form.Group>
+                            <Form.Group widths='equal'>
+                            <Form.Select
+                                    fluid
+                                    label='UF'
+                                    width={6}
+                                >
+
+                                </Form.Select>
+                          
+                                
+
+                            </Form.Group>
+                            <Form.Group widths='equal'>
+                            <Form.Input
+                                    fluid
+                                    label='Complemento'
+                                    width={6}
+                                >
+
+                                </Form.Input>
+                                </Form.Group>
+
+                        </Form>
+                 <Form.Group widths='equal'>
+                 <label><strong>Ativo:</strong></label>
                     <Form.Radio
-                      label='Sim'
-                      value='sim'
-                      checked={ativo === 'Sim'}
-                      onChange={handleAtivoChange}
+                    type="radio"
+                    value="sim"
+                    label="Sim"
                     />
                     <Form.Radio
-                      label='Não'
-                      value='nao'
-                      checked === 'Não'}
-                      onChange={handleAtivoChange}
+                    type="radio"
+                    value="não"
+                    label="não"
                     />
-                  </Form.Group>
+                     </Form.Group>
+                    
 
-              <div style={{ marginTop: '4%' }}>
-                  
-                <Button
-                  type="button"
-                  inverted
-                  circular
-                  icon
-                  labelPosition='left'
-                  color='orange'
-                >
-                  <Icon name='arrow left' />
-                  Voltar
-                </Button>
+                        <div style={{ marginTop: '4%' }}>
+                            <Button
+                                type="button"
+                                inverted
+                                circular
+                                icon
+                                labelPosition='left'
+                                color='orange'
+                            >
+                                <Icon name='reply' />
+                                Voltar
+                            </Button>
 
-                <Button
-                  inverted
-                  circular
-                  icon
-                  labelPosition='left'
-                  color='blue'
-                  floated='right'
-                >
-                  <Icon name='check' />
-                  Salvar
-                </Button>
-              </div>
+                            <Button
+                                inverted
+                                circular
+                                icon
+                                labelPosition='left'
+                                color='blue'
+                                floated='right'
+                            >
+                                <Icon name='save' />
+                                Salvar
+                            </Button>
+                        </div>
 
-            </Form>
-          </div>
-        </Container>
-      </div>
-    </div>
-  );
+                    </div>
+                </Container>
+            </div>
+        </div>
+    );
 }
-
-                     
-              
-
-            

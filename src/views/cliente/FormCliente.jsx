@@ -1,20 +1,23 @@
 import InputMask from 'comigo-tech-react-input-mask';
 
-import React, { useState } from "react";
-import { Button, Container, Divider, Form, Icon, Segment } from 'semantic-ui-react';
+import React,{ useState }  from "react";
+import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import '../../App.css';
-import InputMask from 'react-input-mask';
+import { Segment } from 'semantic-ui-react';
+import { BrowserRouter } from "react-router-dom";
+import Rotas from './Rotas';
 
-import React, { useState } from "react";
+
+
 
 export default function FormCliente () {
+    const [nome, setNome] = useState();
+    const [cpf, setCpf] = useState();
+    const [dataNascimento, setDataNascimento] = useState();
+    const [foneCelular, setFoneCelular] = useState();
+    const [foneFixo, setFoneFixo] = useState();
+ 
     
-   const [nome, setNome] = useState();
-   const [cpf, setCpf] = useState();
-   const [dataNascimento, setDataNascimento] = useState();
-   const [foneCelular, setFoneCelular] = useState();
-   const [foneFixo, setFoneFixo] = useState();
-
 
     return (
         <div>
@@ -40,29 +43,24 @@ export default function FormCliente () {
                                     fluid
                                     label='Nome'
                                     maxLength="100"
+                                    value={nome}
+			                        onChange={e => setNome(e.target.value)}
                                 />
 
                                 <Form.Input
-                                    required
+                                  
                                     fluid
                                     label='CPF'
                                 >
                                     <InputMask
                                         required
                                         mask="999.999.999-99"
+                                        value={cpf}
+				                        onChange={e => setCpf(e.target.value)}
                                     /> 
                                 </Form.Input>
 
-                                <Form.Input
-                                    required
-                                    fluid
-                                    label='RG'
-                                >
-                                    <InputMask
-                                        required
-                                        mask="99.999.999-9"
-                                    />
-                                </Form.Input>
+                                
                             </Form.Group>
                             
                             <Form.Group>
