@@ -7,9 +7,6 @@ import { Segment } from 'semantic-ui-react';
 import { BrowserRouter } from "react-router-dom";
 import Rotas from './Rotas';
 
-
-
-
 export default function FormCliente () {
     const [nome, setNome] = useState();
     const [cpf, setCpf] = useState();
@@ -17,8 +14,6 @@ export default function FormCliente () {
     const [foneCelular, setFoneCelular] = useState();
     const [foneFixo, setFoneFixo] = useState();
  
-    
-
     return (
         <div>
             <div style={{marginTop: '3%'}}>
@@ -44,7 +39,7 @@ export default function FormCliente () {
                                     label='Nome'
                                     maxLength="100"
                                     value={nome}
-			                        onChange={e => setNome(e.target.value)}
+			          onChange={e => setNome(e.target.value)}
                                 />
 
                                 <Form.Input
@@ -56,11 +51,10 @@ export default function FormCliente () {
                                         required
                                         mask="999.999.999-99"
                                         value={cpf}
-				                        onChange={e => setCpf(e.target.value)}
+				         onChange={e => setCpf(e.target.value)}
                                     /> 
                                 </Form.Input>
-
-                                
+				    
                             </Form.Group>
                             
                             <Form.Group>
@@ -70,7 +64,7 @@ export default function FormCliente () {
                                     width={6}
                                 >
                                     <InputMask 
-                                        mask="(99) 9999.9999"
+                                   mask="(99) 9999.9999"
                                     /> 
                                 </Form.Input>
 
