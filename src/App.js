@@ -8,6 +8,7 @@ import FormEntregador from "./views/entergador/FormEntergador";
 import { Segment } from 'semantic-ui-react';
 import Rotas from './Rotas';
 
+
 function App() {
  return (
    <div className="App">
