@@ -1,10 +1,13 @@
-import InputMask from 'comigo-tech-react-input-mask';
-
-import React from "react";
-import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
-import '../../App.css';
+// Importações de bibliotecas
+import React, { useState } from "react";
+import axios from "axios";
 import { BrowserRouter } from "react-router-dom";
-import Rotas from './Rotas';
+import { Button, Container, Divider, Form, Icon } from "semantic-ui-react";
+import InputMask from "comigo-tech-react-input-mask";
+
+// Importações internas do seu projeto
+import Rotas from "./Rotas";
+import "../../App.css";
 
 export default function FormEntregador() {
 
@@ -16,13 +19,44 @@ export default function FormEntregador() {
    const [foneFixo, setFoneFixo] = useState();
    const [qtdEntregasRealizadas, setQtdEntregasRealizadas] = useState();
    const [valorPorFrete, setValorPorFrete] = useState();
-   const [Rua, setRua] = useState();
+   const [rua, setRua] = useState();
    const [numero, setNumero] = useState();
-   const [Bairro, setBairro] = useState();
-   const [Cidade, setCidade] = useState();
-    const [Cep, setEnderecoCep] = useState();
+   const [bairro, setBairro] = useState();
+   const [cidade, setCidade] = useState();
+    const [cep, setEnderecoCep] = useState();
     const [uf, setUf] = useState();
    const [complemento, setComplemento] = useState();
+	
+	 function salvar() {
+
+		let EntregadorRequest = {
+		     nome: nome,
+		     cpf: cpf,
+		     rg: rg,
+		     dtNascimento:dtNascimento,
+		     dataNascimento: dataNascimento,
+		     foneCelular: foneCelular,
+		     foneFixo: foneFixo,
+		     qtdEntregasRealizadas: qtdEntregasRealizadas,
+		    valorPorFrete: valorPorFrete,
+		     rua: rua,
+		    numero: numero,
+		    bairro: bairro,
+		    cidade: cidade,
+		    cep: cep,
+		    uf: uf,
+		    complemento: complemento,
+				
+		}
+	
+		axios.post("http://localhost:8080/api/entregador", entregadorRequest)
+		.then((response) => {
+		     console.log('Entregador cadastrado com sucesso.')
+		})
+		.catch((error) => {
+		     console.log('Erro ao incluir o um entregador.')
+		})
+	}
 
     return (
         <div>
@@ -61,7 +95,7 @@ export default function FormEntregador() {
                                         required
                                         mask="999.999.999-99"
                                         value={cpf}
-			                         	onChange={e => setCpf(e.target.value)}
+			                onChange={e => setCPF(e.target.value)}
                                     />
                                 </Form.Input>
 
@@ -73,7 +107,7 @@ export default function FormEntregador() {
                                         required
                                         mask="99.999.999-9"
                                          value={rg}
-			                            onChange={e => setNome(e.target.value)}
+			                 onChange={e => setRG(e.target.value)}
                                     />
                                 </Form.Input>
                             </Form.Group>
@@ -86,8 +120,8 @@ export default function FormEntregador() {
                                 >
                                     <InputMask
                                          value={dtNascimento'}
-			                            onChange={e => setDTNascimento(e.target.value)}
-                                        placeholder="Ex:20/03/1985"
+			                 onChange={e => setDTNascimento(e.target.value)}
+                                         placeholder="Ex:20/03/1985"
                                     />
                                 </Form.Input>
 
@@ -99,8 +133,8 @@ export default function FormEntregador() {
                                 >
                                     <InputMask
                                         mask="(99) 9999.9999"
-                                        value={foneCelula}
-			                            onChange={e => setfoneCelula(e.target.value)}
+                                        value={foneCelular}
+			                onChange={e => setFoneCelular(e.target.value)}
                                     />
                                 </Form.Input>
                                 <Form.Input
@@ -111,17 +145,19 @@ export default function FormEntregador() {
                                     <InputMask
                                         mask="(99) 9999.9999"
                                         value={foneFixo}
-			                            onChange={e => setFoneFixo(e.target.value)}
+			                 onChange={e => setFoneFixo(e.target.value)}
                                     />
                                 </Form.Input>
 
-                                <Form.Input
-                                    fluid
-                                    label='QTD Entregas Realizadas'
-                                    width={6}
-                                >
-                                </Form.Input>
-
+                                <Form.input
+				  fluid
+				  label="QTD Entregas Realizadas"
+				  <InputMask
+				    mask="9999"
+				    value={qtdEntregas}
+				    onChange={e => setQtdEntregas(e.target.value)}
+				  >
+				   </Form.Input>
                                 <Form.Input
                                     fluid
                                     label='Valor Por Frete'
@@ -135,13 +171,16 @@ export default function FormEntregador() {
                                     fluid
                                     label='Rua'
                                     width={6}
+				    value={rua}
+			           onChange={e => setRua(e.target.value)}
                                 >
-
                                 </Form.Input>
                                 <Form.Input
                                     fluid
-                                    label='Número'
+                                    label='Numero'
                                     width={6}
+				    value={numero}
+		         	   onChange={e => set{numero(e.target.value)}
                                 >
                                 </Form.Input>
 
@@ -151,12 +190,16 @@ export default function FormEntregador() {
                                     fluid
                                     label='Bairro'
                                     width={6}
+				    value={bairro}
+		         	   onChange={e => set{bairro(e.target.value)}
                                 >
                                 </Form.Input>
                                 <Form.Input
                                     fluid
                                     label='Cidade'
                                     width={6}
+				    value={cidade}
+		         	   onChange={e => set{cidade(e.target.value)}
                                 >
 
                                 </Form.Input>
@@ -164,6 +207,8 @@ export default function FormEntregador() {
                                     fluid
                                     label='CEP'
                                     width={6}
+				    value={cep}
+		         	   onChange={e => set{cep(e.target.value)}
                                 >
                                 </Form.Input>
                             </Form.Group>
@@ -173,6 +218,8 @@ export default function FormEntregador() {
                                     fluid
                                     label='UF'
                                     width={6}
+				   value={uf}
+		         	   onChange={e => set{uf(e.target.value)}
                                 >
                                 </Form.Select>
                             </Form.Group>
@@ -182,6 +229,8 @@ export default function FormEntregador() {
                                     fluid
                                     label='Complemento'
                                     width={6}
+				    value={Complemento}
+		         	   onChange={e => setComplemento(e.target.value)}
                                 >
 
                                 </Form.Input>
