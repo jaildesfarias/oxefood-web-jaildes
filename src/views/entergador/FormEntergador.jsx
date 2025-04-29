@@ -1,10 +1,11 @@
+
 // Importações de bibliotecas
 import React, { useState } from "react";
 import axios from "axios";
 import { BrowserRouter } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from "semantic-ui-react";
 import InputMask from "comigo-tech-react-input-mask";
-
+import {BrowesrRouter } from "react-router-dom";
 // Importações internas do seu projeto
 import Rotas from "./Rotas";
 import "../../App.css";
