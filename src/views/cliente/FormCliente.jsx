@@ -35,7 +35,6 @@ export default function FormCliente () {
 		})
 	}
 
- 
     return (
         <div>
             <div style={{marginTop: '3%'}}>
@@ -86,8 +85,8 @@ export default function FormCliente () {
                                         mask="99/99/9999" 
                                         maskChar={null}
                                         placeholder="Ex: 20/03/1985"
-					    value={Data Nascimento}
-			                    onChange={e => setdataNascimento(e.target.value)}
+					    value={dataNascimento}
+			                    onChange={e => setDataNascimento(e.target.value)}
                                     /> 
                                 </Form.Input>
                             </Form.Group
