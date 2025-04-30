@@ -21,15 +21,16 @@ export default function FormEntregador() {
    const [qtdEntregasRealizadas, setQtdEntregasRealizadas] = useState();
    const [valorPorFrete, setValorPorFrete] = useState();
    const [rua, setRua] = useState();
+   const [complemento, setComplemento] = useState();
    const [numero, setNumero] = useState();
    const [bairro, setBairro] = useState();
    const [cidade, setCidade] = useState();
-    const [cep, setEnderecoCep] = useState();
+    const [cep, setCep] = useState();
     const [uf, setUf] = useState();
-   const [complemento, setComplemento] = useState();
+  const [estado, setEstado] = useState();
+   const [ativo, setAtivo] = useState();
 	
 	 function salvar() {
-
 		let EntregadorRequest = {
 		     nome: nome,
 		     cpf: cpf,
@@ -47,6 +48,7 @@ export default function FormEntregador() {
 		    cep: cep,
 		    uf: uf,
 		    complemento: complemento,
+		    ativo: ativo,
 				
 		}
 	
@@ -218,10 +220,12 @@ export default function FormEntregador() {
                             <Form.Select
                                     fluid
                                     label='UF'
-                                    width={6}
-				   value={uf}
-		         	   onChange={e => set{uf(e.target.value)}
-                                >
+				    options={ufList}
+				    placeholder='Selecione'
+				    value={enderecoEstado}
+		         	   onChange={e => set{enderecoEstado(e.target.value)}
+				    }
+                                />
                                 </Form.Select>
                             </Form.Group>
                             
@@ -245,14 +249,13 @@ export default function FormEntregador() {
                           <label><strong>Ativo:</strong></label>
                           <Form.Radio
                             label='Sim'
-                            name='ativo'
-                            value='sim'
-                            style={{ marginRight: '10px' }}
+			   checked={ativo}
+			   onChange={e=> setAtivo(true)}
                           />
                           <Form.Radio
                             label='Não'
-                            name='ativo'
-                            value='não'
+                           checked={!ativo}
+                           onChange={e=> setAtivo(true)
                           />
                         </Form.Group>
 
