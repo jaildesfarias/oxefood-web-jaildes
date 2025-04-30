@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
+
 import '../../App.css';
 import { BrowserRouter } from "react-router-dom";
 import Rotas from './Rotas';
@@ -21,9 +22,9 @@ export default function FormProduto() {
 		     titulo: titulo,
 		     codigo: codigo,
 		     descricao: descricao,
-           valorUnitario: valorUnitario,
-           tempodeEntregaMinimoemMinutos: tempodeEntregaMinimoemMinutos,
-           tempodeEntregaMaximoemMinutos:tempodeEntregaMaximoemMinutos,
+		     valorUnitario: valorUnitario,
+		     tempodeEntregaMinimoemMinutos: tempodeEntregaMinimoemMinutos,
+		     tempodeEntregaMaximoemMinutos:tempodeEntregaMaximoemMinutos,
             
 		}
 	
