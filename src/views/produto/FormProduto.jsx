@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
+import MenuSistema from '../../MenuSistema';
 import '../../App.css';
 import { BrowserRouter } from "react-router-dom";
 import Rotas from './Rotas';
@@ -37,6 +38,7 @@ export default function FormProduto() {
 
   return (
     <div>
+	 <MenuSistema tela={'produto'} />
       <div style={{ marginTop: '3%' }}>
         <Container textAlign='justified'>
           <h2>
