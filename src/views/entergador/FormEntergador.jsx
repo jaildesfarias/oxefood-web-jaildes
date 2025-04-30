@@ -12,55 +12,57 @@ import "../../App.css";
 
 export default function FormEntregador() {
 
-   const [nome, setNome] = useState();
-   const [cpf, setCpf] = useState();
-   const [rg, setRg] = useState();
-   const [dtNascimento, setDTNascimento] = useState();
-   const [foneCelular, setFoneCelular] = useState();
-   const [foneFixo, setFoneFixo] = useState();
-   const [qtdEntregasRealizadas, setQtdEntregasRealizadas] = useState();
-   const [valorPorFrete, setValorPorFrete] = useState();
-   const [rua, setRua] = useState();
-   const [complemento, setComplemento] = useState();
-   const [numero, setNumero] = useState();
-   const [bairro, setBairro] = useState();
-   const [cidade, setCidade] = useState();
-    const [cep, setCep] = useState();
-    const [uf, setUf] = useState();
-  const [estado, setEstado] = useState();
-   const [ativo, setAtivo] = useState();
-	
-	 function salvar() {
-		let EntregadorRequest = {
-		     nome: nome,
-		     cpf: cpf,
-		     rg: rg,
-		     dtNascimento:dtNascimento,
-		     dataNascimento: dataNascimento,
-		     foneCelular: foneCelular,
-		     foneFixo: foneFixo,
-		     qtdEntregasRealizadas: qtdEntregasRealizadas,
-		    valorPorFrete: valorPorFrete,
-		     rua: rua,
-		    numero: numero,
-		    bairro: bairro,
-		    cidade: cidade,
-		    cep: cep,
-		    uf: uf,
-		    complemento: complemento,
-		    ativo: ativo,
-				
-		}
-	
-		axios.post("http://localhost:8080/api/entregador", entregadorRequest)
-		.then((response) => {
-		     console.log('Entregador cadastrado com sucesso.')
-		})
-		.catch((error) => {
-		     console.log('Erro ao incluir o um entregador.')
-		})
-	}
+  const [nome, setNome] = useState();
+const [cpf, setCpf] = useState();
+const [rg, setRg] = useState();
+const [dataNascimento, setDataNascimento] = useState(); // nome padronizado
+const [foneCelular, setFoneCelular] = useState();
+const [foneFixo, setFoneFixo] = useState();
+const [qtdEntregasRealizadas, setQtdEntregasRealizadas] = useState();
+const [valorPorFrete, setValorPorFrete] = useState();
+const [rua, setRua] = useState();
 
+const [numero, setNumero] = useState();
+const [bairro, setBairro] = useState();
+const [cidade, setCidade] = useState();
+const [cep, setCep] = useState();
+const [estado, setEstado] = useState();
+const [uf, setUf] = useState();
+const [complemento, setComplemento] = useState();
+const [ativo, setAtivo] = useState();
+
+function salvar() {
+  let EntregadorRequest = {
+    nome: nome,
+    cpf: cpf,
+    rg: rg,
+    dataNascimento: dataNascimento,
+    foneCelular: foneCelular,
+    foneFixo: foneFixo,
+    qtdEntregasRealizadas: qtdEntregasRealizadas,
+    valorPorFrete: valorPorFrete,
+    rua: rua,
+   
+    numero: numero,
+    bairro: bairro,
+    cidade: cidade,
+    cep: cep,
+    estado: estado,
+    uf: uf,
+  complemento: complemento,
+    ativo: ativo,
+  };
+
+  console.log(EntregadorRequest); // ou fazer requisição à API
+}
+	  axios.post("http://localhost:8080/api/entregador", entregadorRequest)
+              .then((response) => {
+        console.log('Entregador cadastrado com sucesso.');
+      })
+      .catch((error) => {
+        console.log('Erro ao incluir o entregador.');
+      });
+  }}
     return (
         <div>
             <div style={{ marginTop: '3%' }}>
@@ -81,27 +83,21 @@ export default function FormEntregador() {
 
                             <Form.Group widths='equal'>
                                 <Form.Input
-                                    required
-                                    fluid
-                                    label='Nome'
-                                    maxLength="100"
-                                    value={nome}
-			                        onChange={e => setNome(e.target.value)}
-                                />
-
-                                <Form.Input
-                                    required
-                                    fluid
-                                    label='CPF'
-                                >
-                                    <InputMask
-                                        required
-                                        mask="999.999.999-99"
-                                        value={cpf}
-			                onChange={e => setCPF(e.target.value)}
-                                    />
-                                </Form.Input>
-
+					required
+					fluid
+					label='Nome'
+					maxLength="100"
+					value={nome}
+					onChange={e => setNome(e.target.value)}
+				/>
+			       <Form.Input
+					fluid
+					label='CPF'>
+					<InputMask 
+					mask="999.999.999-99"
+					value={cpf}
+					onChange={e => setCpf(e.target.value)} /> 
+				</Form.Input>
                                 <Form.Input
                                     fluid
                                     label='RG'
@@ -109,9 +105,9 @@ export default function FormEntregador() {
                                     <InputMask
                                         required
                                         mask="99.999.999-9"
-                                         value={rg}
+                                        value={rg}
 			                 onChange={e => setRG(e.target.value)}
-                                    />
+                                    />	
                                 </Form.Input>
                             </Form.Group>
 
@@ -125,6 +121,8 @@ export default function FormEntregador() {
                                          value={dtNascimento'}
 			                 onChange={e => setDTNascimento(e.target.value)}
                                          placeholder="Ex:20/03/1985"
+					value={{dtNascimento}
+			                 onChange={e => setDTNascimento(e.target.value)}
                                     />
                                 </Form.Input>
 
@@ -165,6 +163,8 @@ export default function FormEntregador() {
                                     fluid
                                     label='Valor Por Frete'
                                     width={6}
+				   value=valor{ValorPorfrete}
+				    onChange={e => setValorPorFrete(e.target.value)}
                                 >
                                 </Form.Input>
                             </Form.Group>
@@ -222,15 +222,15 @@ export default function FormEntregador() {
                                     label='UF'
 				    options={ufList}
 				    placeholder='Selecione'
-				    value={enderecoEstado}
-		         	   onChange={e => set{enderecoEstado(e.target.value)}
+				    value={estado}
+		         	   onChange={e => set{Estado(e.target.value)}
 				    }
                                 />
                                 </Form.Select>
                             </Form.Group>
                             
                             <Form.Group widths='equal'>
-                            <Form.Input
+				      <Form.Input
                                     fluid
                                     label='Complemento'
                                     width={6}
@@ -238,7 +238,8 @@ export default function FormEntregador() {
 		         	   onChange={e => setComplemento(e.target.value)}
                                 >
 
-                                </Form.Input>
+                                </Form.Input
+                          >
                                 </Form.Group>
 
                         </Form>
