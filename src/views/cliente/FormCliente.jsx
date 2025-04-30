@@ -2,9 +2,11 @@ import InputMask from 'comigo-tech-react-input-mask';
 
 import React,{ useState }  from "react";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
+import MenuSistema from '../../MenuSistema';
 import '../../App.css';
 import { Segment } from 'semantic-ui-react';
 import { BrowserRouter } from "react-router-dom";
+
 import Rotas from './Rotas';
 import axios from "axios";
 
@@ -37,6 +39,8 @@ export default function FormCliente () {
 
     return (
         <div>
+		<MenuSistema tela={'cliente'} />
+
             <div style={{marginTop: '3%'}}>
                 <Container textAlign='justified' >
 
