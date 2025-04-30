@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { BrowserRouter } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from "semantic-ui-react";
+import MenuSistema from '../../MenuSistema';
+
 import InputMask from "comigo-tech-react-input-mask";
 import {BrowesrRouter } from "react-router-dom";
 // Importações internas do seu projeto
@@ -65,6 +67,7 @@ function salvar() {
   }}
     return (
         <div>
+	    <MenuSistema tela={'entregador'} />
             <div style={{ marginTop: '3%' }}>
                 <Container textAlign='justified' >
 
