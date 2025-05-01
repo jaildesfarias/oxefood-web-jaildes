@@ -1,299 +1,264 @@
-
-// Importações de bibliotecas
-import React, { useState } from "react";
 import axios from "axios";
-import { BrowserRouter } from "react-router-dom";
-import { Button, Container, Divider, Form, Icon } from "semantic-ui-react";
-import MenuSistema from '../../MenuSistema';
-
 import InputMask from "comigo-tech-react-input-mask";
-import {BrowesrRouter } from "react-router-dom";
-// Importações internas do seu projeto
-import Rotas from "./Rotas";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Button, Container, Divider, Form, Icon } from "semantic-ui-react";
 import "../../App.css";
+import MenuSistema from "../../MenuSistema";
+
 
 export default function FormEntregador() {
+  const [nome, setNome] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [rg, setRg] = useState('');
+  const [dataNascimento, setDataNascimento] = useState('');
+  const [foneCelular, setFoneCelular] = useState('');
+  const [foneFixo, setFoneFixo] = useState('');
+  const [qtdEntregasRealizadas, setQtdEntregasRealizadas] = useState('');
+  const [valorPorFrete, setValorPorFrete] = useState('');
+  const [rua, setRua] = useState('');
+  const [numero, setNumero] = useState('');
+  const [bairro, setBairro] = useState('');
+  const [cidade, setCidade] = useState('');
+  const [cep, setCep] = useState('');
+  const [estado, setEstado] = useState('');
+  const [uf, setUf] = useState('');
+  const [complemento, setComplemento] = useState('');
+  const [ativo, setAtivo] = useState(true);
 
-  const [nome, setNome] = useState();
-const [cpf, setCpf] = useState();
-const [rg, setRg] = useState();
-const [dataNascimento, setDataNascimento] = useState(); // nome padronizado
-const [foneCelular, setFoneCelular] = useState();
-const [foneFixo, setFoneFixo] = useState();
-const [qtdEntregasRealizadas, setQtdEntregasRealizadas] = useState();
-const [valorPorFrete, setValorPorFrete] = useState();
-const [rua, setRua] = useState();
+  const ufList = [
+    { key: 'SP', value: 'SP', text: 'São Paulo' },
+    { key: 'RJ', value: 'RJ', text: 'Rio de Janeiro' },
+    { key: 'MG', value: 'MG', text: 'Minas Gerais' },
+    // Adicione mais conforme necessário
+  ];
 
-const [numero, setNumero] = useState();
-const [bairro, setBairro] = useState();
-const [cidade, setCidade] = useState();
-const [cep, setCep] = useState();
-const [estado, setEstado] = useState();
-const [uf, setUf] = useState();
-const [complemento, setComplemento] = useState();
-const [ativo, setAtivo] = useState();
+  function salvar() {
+    const entregadorRequest = {
+      nome,
+      cpf,
+      rg,
+      dataNascimento,
+      foneCelular,
+      foneFixo,
+      qtdEntregasRealizadas,
+      valorPorFrete,
+      rua,
+      numero,
+      complemento,
+      bairro,
+      cidade,
+      cep,
+      estado,
+      uf,
+  
+      ativo
+    };
 
-function salvar() {
-  let EntregadorRequest = {
-    nome: nome,
-    cpf: cpf,
-    rg: rg,
-    dataNascimento: dataNascimento,
-    foneCelular: foneCelular,
-    foneFixo: foneFixo,
-    qtdEntregasRealizadas: qtdEntregasRealizadas,
-    valorPorFrete: valorPorFrete,
-    rua: rua,
-   
-    numero: numero,
-    bairro: bairro,
-    cidade: cidade,
-    cep: cep,
-    estado: estado,
-    uf: uf,
-  complemento: complemento,
-    ativo: ativo,
-  };
-
-  console.log(EntregadorRequest); // ou fazer requisição à API
-}
-	  axios.post("http://localhost:8080/api/entregador", entregadorRequest)
-              .then((response) => {
+    axios.post("http://localhost:8080/api/entregador", entregadorRequest)
+      .then((response) => {
         console.log('Entregador cadastrado com sucesso.');
       })
       .catch((error) => {
         console.log('Erro ao incluir o entregador.');
       });
-  }}
-    return (
-        <div>
-	    <MenuSistema tela={'entregador'} />
-            <div style={{ marginTop: '3%' }}>
-                <Container textAlign='justified' >
+  }
 
-                    <h2>
-                        <span style={{ color: 'darkgray' }}>
-                            Entregador &nbsp;
-                            <Icon name='angle double right' size="small" />
-                        </span>
-                        Cadastro
-                    </h2>
+  function voltar() {
+    console.log("Implementar navegação de retorno.");
+  }
 
-                    <Divider />
+  return (
+    <div>
+      <MenuSistema tela={'entregador'} />
+      <div style={{ marginTop: '3%' }}>
+        <Container textAlign='justified'>
+          <h2>
+            <span style={{ color: 'darkgray' }}>
+              Entregador &nbsp;
+              <Icon name='angle double right' size="small" />
+            </span>
+            Cadastro
+          </h2>
 
-                    <div style={{ marginTop: '4%' }}>
-                        <Form>
+          <Divider />
 
-                            <Form.Group widths='equal'>
-                                <Form.Input
-					required
-					fluid
-					label='Nome'
-					maxLength="100"
-					value={nome}
-					onChange={e => setNome(e.target.value)}
-				/>
-			       <Form.Input
-					fluid
-					label='CPF'>
-					<InputMask 
-					mask="999.999.999-99"
-					value={cpf}
-					onChange={e => setCpf(e.target.value)} /> 
-				</Form.Input>
-                                <Form.Input
-                                    fluid
-                                    label='RG'
-                                >
-                                    <InputMask
-                                        required
-                                        mask="99.999.999-9"
-                                        value={rg}
-			                 onChange={e => setRG(e.target.value)}
-                                    />	
-                                </Form.Input>
-                            </Form.Group>
+          <div style={{ marginTop: '4%' }}>
+            <Form>
+              <Form.Group widths='equal'>
+                <Form.Input
+                  required
+                  fluid
+                  label='Nome'
+                  value={nome}
+                  onChange={e => setNome(e.target.value)}
+                />
+                <Form.Input fluid label='CPF'>
+                  <InputMask
+                    required
+                    mask="999.999.999-99"
+                    value={cpf}
+                    onChange={e => setCpf(e.target.value)}
+                  />
+                </Form.Input>
+                <Form.Input fluid label='RG'>
+                  <InputMask
+                    required
+                    mask="99.999.999-9"
+                    value={rg}
+                    onChange={e => setRg(e.target.value)}
+                  />
+                </Form.Input>
+              </Form.Group>
 
-                            <Form.Group>
-                                <Form.Input
-                                    fluid
-                                    label='DT Nascimento'
-                                    width={6}
-                                >
-                                    <InputMask
-                                         value={dtNascimento'}
-			                 onChange={e => setDTNascimento(e.target.value)}
-                                         placeholder="Ex:20/03/1985"
-					value={{dtNascimento}
-			                 onChange={e => setDTNascimento(e.target.value)}
-                                    />
-                                </Form.Input>
+              <Form.Group widths='equal'>
+                <Form.Input fluid label='Data Nascimento' width={6}>
+                  <InputMask
+                    mask="99/99/9999"
+                    value={dataNascimento}
+                    onChange={e => setDataNascimento(e.target.value)}
+                    placeholder="Ex: 20/03/1985"
+                  />
+                </Form.Input>
 
-                                <Form.Input
-                                    required
-                                    fluid
-                                    label='Fone Celular'
-                                    width={6}
-                                >
-                                    <InputMask
-                                        mask="(99) 9999.9999"
-                                        value={foneCelular}
-			                onChange={e => setFoneCelular(e.target.value)}
-                                    />
-                                </Form.Input>
-                                <Form.Input
-                                    fluid
-                                    label='Fone fixo'
-                                    width={6}
-                                >
-                                    <InputMask
-                                        mask="(99) 9999.9999"
-                                        value={foneFixo}
-			                 onChange={e => setFoneFixo(e.target.value)}
-                                    />
-                                </Form.Input>
+                <Form.Input label='Fone Celular' width={6}>
+                  <InputMask
+                    mask="(99) 9999.9999"
+                    value={foneCelular}
+                    onChange={e => setFoneCelular(e.target.value)}
+                  />
+                </Form.Input>
 
-                                <Form.input
-				  fluid
-				  label="QTD Entregas Realizadas"
-				  <InputMask
-				    mask="9999"
-				    value={qtdEntregas}
-				    onChange={e => setQtdEntregas(e.target.value)}
-				  >
-				   </Form.Input>
-                                <Form.Input
-                                    fluid
-                                    label='Valor Por Frete'
-                                    width={6}
-				   value=valor{ValorPorfrete}
-				    onChange={e => setValorPorFrete(e.target.value)}
-                                >
-                                </Form.Input>
-                            </Form.Group>
-                            
-                            <Form.Group widths='equal'>
-                            <Form.Input
-                                    fluid
-                                    label='Rua'
-                                    width={6}
-				    value={rua}
-			           onChange={e => setRua(e.target.value)}
-                                >
-                                </Form.Input>
-                                <Form.Input
-                                    fluid
-                                    label='Numero'
-                                    width={6}
-				    value={numero}
-		         	   onChange={e => set{numero(e.target.value)}
-                                >
-                                </Form.Input>
+                <Form.Input fluid label='Fone Fixo' width={6}>
+                  <InputMask
+                    mask="(99) 9999.9999"
+                    value={foneFixo}
+                    onChange={e => setFoneFixo(e.target.value)}
+                  />
+                </Form.Input>
+              </Form.Group>
 
-                            </Form.Group>
-                            <Form.Group widths='equal'>
-                            <Form.Input
-                                    fluid
-                                    label='Bairro'
-                                    width={6}
-				    value={bairro}
-		         	   onChange={e => set{bairro(e.target.value)}
-                                >
-                                </Form.Input>
-                                <Form.Input
-                                    fluid
-                                    label='Cidade'
-                                    width={6}
-				    value={cidade}
-		         	   onChange={e => set{cidade(e.target.value)}
-                                >
+              <Form.Group widths='equal'>
+                <Form.Input
+                  fluid
+                  label="Qtd Entregas Realizadas"
+                  value={qtdEntregasRealizadas}
+                  onChange={e => setQtdEntregasRealizadas(e.target.value)}
+                />
+                <Form.Input
+                  fluid
+                  label='Valor Por Frete'
+                  value={valorPorFrete}
+                  onChange={e => setValorPorFrete(e.target.value)}
+                />
+              </Form.Group>
 
-                                </Form.Input>
-                                <Form.Input
-                                    fluid
-                                    label='CEP'
-                                    width={6}
-				    value={cep}
-		         	   onChange={e => set{cep(e.target.value)}
-                                >
-                                </Form.Input>
-                            </Form.Group>
-                            
-                            <Form.Group widths='equal'>
-                            <Form.Select
-                                    fluid
-                                    label='UF'
-				    options={ufList}
-				    placeholder='Selecione'
-				    value={estado}
-		         	   onChange={e => set{Estado(e.target.value)}
-				    }
-                                />
-                                </Form.Select>
-                            </Form.Group>
-                            
-                            <Form.Group widths='equal'>
-				      <Form.Input
-                                    fluid
-                                    label='Complemento'
-                                    width={6}
-				    value={Complemento}
-		         	   onChange={e => setComplemento(e.target.value)}
-                                >
+              <Form.Group widths='equal'>
+                <Form.Input
+                  fluid
+                  label='Rua'
+                  value={rua}
+                  onChange={e => setRua(e.target.value)}
+                />
+                <Form.Input
+                  fluid
+                  label='Número'
+                  value={numero}
+                  onChange={e => setNumero(e.target.value)}
+                />
+              </Form.Group>
 
-                                </Form.Input
-                          >
-                                </Form.Group>
+              <Form.Group widths='equal'>
+                <Form.Input
+                  fluid
+                  label='Bairro'
+                  value={bairro}
+                  onChange={e => setBairro(e.target.value)}
+                />
+                <Form.Input
+                  fluid
+                  label='Cidade'
+                  value={cidade}
+                  onChange={e => setCidade(e.target.value)}
+                />
+                <Form.Input
+                  fluid
+                  label='CEP'
+                  value={cep}
+                  onChange={e => setCep(e.target.value)}
+                />
+              </Form.Group>
 
-                        </Form>
-                        
-                 <Form.Group inline style={{ alignItems: 'center', gap: '20px' }}>//inline no Form.Group ➔ deixa tudo na horizontal.
-                     //style={{ alignItems: 'center', gap: '20px' }} ➔ alinha verticalmente e dá um espacinho entre os itens
-                    // marginRight: '10px' ➔ dá um espacinho entre o primeiro radio e o segundo, para não ficarem grudados.
-                          <label><strong>Ativo:</strong></label>
-                          <Form.Radio
-                            label='Sim'
-			   checked={ativo}
-			   onChange={e=> setAtivo(true)}
-                          />
-                          <Form.Radio
-                            label='Não'
-                           checked={!ativo}
-                           onChange={e=> setAtivo(true)
-                          />
-                        </Form.Group>
+              <Form.Group widths='equal'>
+                <Form.Select
+                  fluid
+                  label='UF'
+                  options={ufList}
+                  placeholder='Selecione'
+                  value={uf}
+                  onChange={(e, { value }) => setUf(value)}
+                />
+              </Form.Group>
 
-                        <div style={{ marginTop: '4%' }}>
-                            <Button
-                                type="button"
-                                inverted
-                                circular
-                                icon
-                                labelPosition='left'
-                                color='orange'
-                                onClick={() => voltar()}
-                            >
-                                <Icon name='reply' />
-                                Voltar
-                            </Button>
+              <Form.Group widths='equal'>
+                <Form.Input
+                  fluid
+                  label='Complemento'
+                  value={complemento}
+                  onChange={e => setComplemento(e.target.value)}
+                />
+              </Form.Group>
 
-                            <Button
-                                inverted
-                                circular
-                                icon
-                                labelPosition='left'
-                                color='blue'
-                                floated='right'
-                                onClick={() => salvar()}
-                            >
-                                <Icon name='save' />
-                                Salvar
-                            </Button>
-                        </div>
+              <Form.Group inline>
+                <label><strong>Ativo:</strong></label>
+                <Form.Radio
+                  label='Sim'
+                  checked={ativo === true}
+                  onChange={() => setAtivo(true)}
+                />
+                <Form.Radio
+                  label='Não'
+                  checked={ativo === false}
+                  onChange={() => setAtivo(false)}
+                />
+              </Form.Group>
 
-                    </div>
-                </Container>
-            </div>
-        </div>
-    );
+              <div style={{ marginTop: '4%' }}>
+                <Link to={'/list-cliente'}>
+                <Button
+                  type="button"
+                  inverted
+                  circular
+                  icon
+                  labelPosition='left'
+                  color='orange'
+                  onClick={voltar}
+                >
+                  <Icon name='reply' />
+                  Voltar
+                </Button>
+                </Link>
+
+                <Link to={'/list-cliente'}>
+                <Button
+                  inverted
+                  circular
+                  icon
+                  labelPosition='left'
+                  color='blue'
+                  floated='right'
+                  onClick={salvar}
+                >
+                  <Icon name='save' />
+                  Salvar
+                </Button>
+                </Link>
+                
+              </div>
+            </Form>
+          </div>
+        </Container>
+      </div>
+    </div>
+  );
 }
