@@ -39,12 +39,14 @@ export default function ListCliente () {
 
                 <div style={{marginTop: '4%'}}>
                     <Button
-                        label='Novo'
+                        label='Novo'//
                         circular
                         color='orange'
                         icon='clipboard outline'
                         floated='right'
                         as={Link}
+                       to='/form-cliente'//da tela listagem entre na tela cliente
+
                         />
                         <br/><br/><br/>
                   
