@@ -6,17 +6,17 @@ import MenuSistema from '../../MenuSistema';
 
 export default function ListCliente () {
 
-   const [lista, setLista] = useState([]);//array[]
+   const [lista, setLista] = useState([]);//array[]//ela vai ser executada semprem que uma tela  for carregada
 
    useEffect(() => {
        carregarLista();
-   }, [])
+   }, [])//É um arrary
 
    function carregarLista() {
 
-       axios.get("http://localhost:8080/api/cliente")
+       axios.get("http://localhost:8080/api/cliente")//é uma rota com lista com um objeto cliente
        .then((response) => {
-           setLista(response.data)
+           setLista(response.data)//lista de cliente
        })
    }
    function formatarData(dataParam) {
@@ -61,14 +61,14 @@ export default function ListCliente () {
                                 </Table.Row>
                             </Table.Header>
                        
-                            <Table.Body>
+                            <Table.Body>//e um form 
  
                                 { lista.map(cliente => (
  
                                     <Table.Row key={cliente.id}>
                                         <Table.Cell>{cliente.nome}</Table.Cell>
                                         <Table.Cell>{cliente.cpf}</Table.Cell>
-                                        <Table.Cell>{formatarData(cliente.dataNascimento)}</Table.Cell>
+                                        <Table.Cell>{formatarData(cliente.dataNascimento)}</Table.Cell>//Na data ele traz no formato americano
                                         <Table.Cell>{cliente.foneCelular}</Table.Cell>
                                         <Table.Cell>{cliente.foneFixo}</Table.Cell>
                                         <Table.Cell textAlign='center'>
