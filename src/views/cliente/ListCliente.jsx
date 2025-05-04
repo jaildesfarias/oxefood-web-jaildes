@@ -25,7 +25,7 @@ export default function ListCliente () {
         return ''
     }
 
-    let arrayData = dataParam.split('-');
+    let arrayData = dataParam.split('-');// aQUI eu quebro o array
     return arrayData[2] + '/' + arrayData[1] + '/' + arrayData[0];
 }return(
     <div>
