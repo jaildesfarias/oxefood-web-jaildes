@@ -57,6 +57,17 @@ export default function ListEntregador () {
                                     <Table.HeaderCell>Data de Nascimento</Table.HeaderCell>
                                     <Table.HeaderCell>Fone Celular</Table.HeaderCell>
                                     <Table.HeaderCell>Fone Fixo</Table.HeaderCell>
+                                    <Table.HeaderCell>QTD EntregasRealizadas</Table.HeaderCell>
+                                    <Table.HeaderCell>Valor Por Frente</Table.HeaderCell>
+                                    <Table.HeaderCell>Rua</Table.HeaderCell>
+                                    <Table.HeaderCell>Numero</Table.HeaderCell>
+                                    <Table.HeaderCell>Bairro</Table.HeaderCell>
+                                    <Table.HeaderCell>Cidade</Table.HeaderCell>
+                                   <Table.HeaderCell>Cep</Table.HeaderCell>
+                                   <Table.HeaderCell>Estado</Table.HeaderCell>
+                                   <Table.HeaderCell>Uf</Table.HeaderCell>
+                                   <Table.HeaderCell>Complemento</Table.HeaderCell>
+                                   <Table.HeaderCell>Ativo</Table.HeaderCell>
                                     <Table.HeaderCell textAlign='center'>Ações</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
