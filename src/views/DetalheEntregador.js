@@ -44,7 +44,7 @@ function DetalheEntregador() {
         <div style={{ marginTop: '20px' }}>
           <h4>Foto do Entregador</h4>
           <img
-            src={entregador.foto ? entregador.foto : 'http://localhost:8080/images/default-avatar.png'}
+            src={entregador.foto ? entregador.foto : 'http://localhost:8080/images/ThomasJefferson.png'}
             alt="Foto do entregador"
             style={{ width: '200px', height: '200px', objectFit: 'cover', borderRadius: '100px' }}
           />
