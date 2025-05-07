@@ -1,19 +1,88 @@
 import InputMask from 'comigo-tech-react-input-mask';
-import React from "react";
+import React, { useEffect, useState } from "react";
+
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
-import { Link } from "react-router-dom";
+
+import { Link, useLocation } from "react-router-dom";
+
 
 export default function FormCliente () {
+
+    const [nome, setNome] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [dataNascimento, setDataNascimento] = useState('');
+    const [foneCelular, setFoneCelular] = useState('');
+    const [foneFixo, setfoneFixo] = useState('');
+    const { state } = useLocation();
+    const [idCliente, setIdCliente] = useState();
+  
+    
+  function salvar() {
+    const clienteRequest = {
+      nome,
+      cpf,
+      rg,
+      dataNascimento,
+      foneCelular,
+      foneFixo,
+
+    };
+    axios.post("http://localhost:8080/api/cliente", clienteRequestRequest)
+    .then((response) => {      
+        console.log('Cliente cadastrado com sucesso.');
+    })
+    .catch((error) => {
+    
+            console.log('Erro ao incluir o clientre.');
+          });
+
+          function voltar() {
+            console.log("Implementar navegação de retorno.");
+          }
+        
+      useEffect(() => {//CONSULTA O CLIENTE
+             if (state != null && state.id != null) {
+                 axios.get("http://localhost:8080/api/cliente/" + state.id)
+         .then((response) => {
+                     setIdCliente(response.data.id)
+                     setNome(response.data.nome)
+                     setCpf(response.data.cpf)
+                     setDataNascimento(response.data.dataNascimento)
+                     setFoneCelular(response.data.foneCelular)
+                     setFoneFixo(response.data.foneFixo)
+                            })
+                                           
+                        }
+                }, [state])
+                
+            }
+                    
+                        function formatarData(dataParam) {
+
+                            if (dataParam === null || dataParam === '' || dataParam === undefined) {
+                                return ''
+                            }
+       		}
+        
+        
+
+
 
     return (
 
         <div>
 
-            <div style={{marginTop: '3%'}}>
+            <div style={{marginTop: '3%'}}>//
 
                 <Container textAlign='justified' >
 
-                    <h2> <span style={{color: 'darkgray'}}> Cliente &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro </h2>
+                                { idCliente === undefined &&
+                    <h2> <span style={{color: 'darkgray'}}> Cliente &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro</h2>
+                }
+                { idCliente != undefined &&
+                    <h2> <span style={{color: 'darkgray'}}> Cliente &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
+                }
+
 
                     <Divider />
 
@@ -118,3 +187,4 @@ export default function FormCliente () {
     );
 
 }
+

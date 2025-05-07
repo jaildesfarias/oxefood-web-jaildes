@@ -5,13 +5,7 @@ import { Link } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
-const [nome, setNome] = useState('');
-    const [cpf, setCpf] = useState('');
-    const [dataNascimento, setDataNascimento] = useState('');
-    const [foneCelular, setFoneCelular] = useState('');
-    const [foneFixo, setfoneFixo] = useState('');
-    const { state } = useLocation();
-    const [idCliente, setIdCliente] = useState();
+
 
 
 function salvar() {
@@ -21,28 +15,35 @@ function salvar() {
         cpf: cpf,
         dataNascimento: dataNascimento,
         foneCelular: foneCelular,
-        foneFixo: foneFixo
+        foneFixo: foneFixo,
+        qtdEntregasRealizadas:qtdEntregasRealizadas,
+        valorPorFrete:valorPorFrete,
+        rua: rua,
+      numero:numero,
+      complemento:complemento,
+      bairro:bairro,
+      cidade:cidade,
+      cep:cep,
+      estado:estado,
+      uf,uf,https:
+
+
     }
     
 
     if (idCliente != null) { //Alteração:
-        axios.put("http://localhost:8080/api/cliente/" + idCliente, clienteRequest)
-        .then((response) => { console.log('Cliente alterado com sucesso.') })
-        .catch((error) => { console.log('Erro ao alter um cliente.') })
+        axios.put("http://localhost:8080/api/entregador/" + idEntregador, entregadorRequest)
+        .then((response) => { console.log('Entregador alterado com sucesso.') })
+        .catch((error) => { console.log('Erro ao alter um entregador.') })
     } else { //Cadastro:
-        axios.post("http://localhost:8080/api/cliente", clienteRequest)
-        .then((response) => { console.log('Cliente cadastrado com sucesso.') })
-        .catch((error) => { console.log('Erro ao incluir o cliente.') })
+        axios.post("http://localhost:8080/api/entregador", clienteRequest)
+        .then((response) => { console.log('Entregador cadastrado com sucesso.') })
+        .catch((error) => { console.log('Erro ao incluir o entregador.') })
     }
 }
-function confirmaRemover(id) {
-    setOpenModal(true)
-    setIdRemover(id)
-}
 
 
-
-export default function ListCliente () {
+export default function ListEntregador () {
 
    const [lista, setLista] = useState([]);//array[]
 
@@ -52,7 +53,7 @@ export default function ListCliente () {
 
    function carregarLista() {
 
-       axios.get("http://localhost:8080/api/cliente")
+       axios.get("http://localhost:8080/api/entregador")
        .then((response) => {
            setLista(response.data)
        })
@@ -101,33 +102,32 @@ export default function ListCliente () {
                        
                             <Table.Body>
  
-                                { lista.map(cliente => (
+                                { lista.map(entregador => (
  
-                                    <Table.Row key={cliente.id}>
-                                        <Table.Cell>{cliente.nome}</Table.Cell>
-                                        <Table.Cell>{cliente.cpf}</Table.Cell>
+                                    <Table.Row key={entregador.id}>
+                                        <Table.Cell>{entregador.nome}</Table.Cell>
+                                        <Table.Cell>{entregador.cpf}</Table.Cell>
                                         <Table.Cell>{formatarData(dataNascimento)}</Table.Cell>
-                                        <Table.Cell>{cliente.foneCelular}</Table.Cell>
-                                        <Table.Cell>{cliente.foneFixo}</Table.Cell>
+                                        <Table.Cell>{entregador.foneCelular}</Table.Cell>
+                                        <Table.Cell>{entregador.foneFixo}</Table.Cell>
                                         <Table.Cell textAlign='center'>
  
                                              <Button
                                                 inverted
                                                 circular
                                                 color='green'
-                                                title='Clique aqui para editar os dados deste cliente'
+                                                title='Clique aqui para editar os dados deste entregador'
                                                 icon>
-                                                    onClick={e => confirmaRemover(cliente.id)}>
-                                                    <Link to="/form-cliente" state={{id: cliente.id}} style={{color: 'green'}}> <Icon name='edit' /> </Link>
+                                                    <Link to="/form-entregador" state={{id: entregador.id}} style={{color: 'green'}}> <Icon name='edit' /> </Link>
                                             </Button>
 ;
                                             <Button
                                                inverted
                                                circular
                                                color='red'
-                                               title='Clique aqui para remover este cliente'
+                                               title='Clique aqui para remover este entregador'
                                                icon>
-                                                <Link to="/form-cliente" state={{id: cliente.id}} style={{color: 'green'}}> <Icon name='edit' /> </Link>
+                                                <Link to="/form-entregador" state={{id: cliente.id}} style={{color: 'green'}}> <Icon name='edit' /> </Link>
 
                                                    <Icon name='trash' />
                                            </Button>
@@ -141,10 +141,6 @@ export default function ListCliente () {
                    </div>
                </Container>
            </div>
-                    function confirmaRemover(id) {
-                setOpenModal(true)
-                setIdRemover(id)
-            
 
        </div>
    )
