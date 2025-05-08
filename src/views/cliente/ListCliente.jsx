@@ -5,6 +5,7 @@ import { Button, Container, Divider, Icon, Table } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
 export default function ListCliente () {
+    
 
    const [lista, setLista] = useState([]);//array[]//ela vai ser executada semprem que uma tela  for carregada
 
@@ -38,6 +39,7 @@ export default function ListCliente () {
                 <Divider />
 
                 <div style={{marginTop: '4%'}}>
+                   
                     <Button
                         label='Novo'//
                         circular
