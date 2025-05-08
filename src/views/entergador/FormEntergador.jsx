@@ -266,8 +266,7 @@ export default function FormEntregador() {
                     color='orange'
                     onClick={voltar}
                   >
-                    <Icon name='reply' />
-                    Voltar
+                    salvar
                   </Button>
                 </Link>
 
