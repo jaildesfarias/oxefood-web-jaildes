@@ -1,8 +1,10 @@
-import axios from "axios";
-import InputMask from "comigo-tech-react-input-mask";
+import InputMask from 'comigo-tech-react-input-mask';
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon, Modal } from "semantic-ui-react";
+
+
+import axios from "axios";
+import { Link } from "react-router-dom";
 import "../../App.css";
 import MenuSistema from "../../MenuSistema";
 
@@ -24,19 +26,18 @@ export default function FormEntregador() {
   const [uf, setUf] = useState('');
   const [complemento, setComplemento] = useState('');
   const [ativo, setAtivo] = useState(true);
-
   const [modalOpen, setModalOpen] = useState(false);
 
   const ufList = [
     { key: 'SP', value: 'SP', text: 'São Paulo' },
     { key: 'RJ', value: 'RJ', text: 'Rio de Janeiro' },
     { key: 'MG', value: 'MG', text: 'Minas Gerais' },
-    // Adicione mais conforme necessário
+    
   ];
 
   useEffect(() => {
-    // Simulação de carregamento de dados do entregador
-    const fetchEntregador = async () => {
+   
+    const fetchEntregador = async () => { // Simulação de carregamento de dados do entregador
       try {
         const response = await axios.get("http://localhost:8080/api/entregador/1");
         const entregador = response.data;
@@ -340,6 +341,12 @@ export default function FormEntregador() {
           </div>
         </Container>
       </div>
+      <<<<<<< HEAD
+// Sua versão local
+=======
+/* Versão do repositório remoto */
+>>>>>>> main
+
     </div>
   );
 }
