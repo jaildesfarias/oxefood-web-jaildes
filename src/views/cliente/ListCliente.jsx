@@ -1,178 +1,143 @@
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
-import { Button, Container, Divider, Icon } from 'semantic-ui-react';
+import { Link, useLocation } from "react-router-dom";
+import { Button, Container, Divider, Icon, Modal, Header, Table } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
-const [nome, setNome] = useState('');
-    const [cpf, setCpf] = useState('');
-    const [dataNascimento, setDataNascimento] = useState('');
-    const [foneCelular, setFoneCelular] = useState('');
-    const [foneFixo, setfoneFixo] = useState('');
-    const { state } = useLocation();
-    const [idCliente, setIdCliente] = useState();
-    const [openModal, setOpenModal] = useState(false);
-   const [idRemover, setIdRemover] = useState();
+export default function ListCliente() {
 
+  const [lista, setLista] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [idRemover, setIdRemover] = useState(null);
 
+  useEffect(() => {
+    carregarLista();
+  }, []);
 
-function salvar() {
+  function carregarLista() {
+    axios.get("http://localhost:8080/api/cliente")
+      .then((response) => {
+        setLista(response.data);
+      })
+      .catch((error) => {
+        console.log("Erro ao carregar lista de clientes", error);
+      });
+  }
 
-    let clienteRequest = {
-        nome: nome,
-        cpf: cpf,
-        dataNascimento: dataNascimento,
-        foneCelular: foneCelular,
-        foneFixo: foneFixo
-    }
-    
+  function formatarData(dataParam) {
+    if (!dataParam) return '';
+    const [ano, mes, dia] = dataParam.split('-');
+    return `${dia}/${mes}/${ano}`;
+  }
 
-    if (idCliente != null) { //Alteração:
-        axios.put("http://localhost:8080/api/cliente/" + idCliente, clienteRequest)
-        .then((response) => { console.log('Cliente alterado com sucesso.') })
-        .catch((error) => { console.log('Erro ao alter um cliente.') })
-    } else { //Cadastro:
-        axios.post("http://localhost:8080/api/cliente", clienteRequest)
-        .then((response) => { console.log('Cliente cadastrado com sucesso.') })
-        .catch((error) => { console.log('Erro ao incluir o cliente.') })
-    }
-}
-function confirmaRemover(id) {//remover
-    setOpenModal(true)
-    setIdRemover(id)
-}
+  function confirmaRemover(id) {
+    setOpenModal(true);
+    setIdRemover(id);
+  }
 
+  function remover() {
+    axios.delete(`http://localhost:8080/api/cliente/${idRemover}`)
+      .then(() => {
+        setOpenModal(false);
+        carregarLista();
+      })
+      .catch((error) => {
+        console.log("Erro ao remover cliente", error);
+      });
+  }
 
-
-export default function ListCliente () {
-
-   const [lista, setLista] = useState([]);//array[]//ela vai ser executada semprem que uma tela  for carregada
-
-   useEffect(() => {
-       carregarLista();
-   }, [])//É um arrary
-
-   function carregarLista() {
-
-       axios.get("http://localhost:8080/api/cliente")//é uma rota com lista com um objeto cliente
-       .then((response) => {
-           setLista(response.data)//lista de cliente
-       })
-   }
-   function formatarData(dataParam) {
-
-    if (dataParam === null || dataParam === '' || dataParam === undefined) {
-        return ''
-    }
-
-    let arrayData = dataParam.split('-');// aQUI eu quebro o array
-    return arrayData[2] + '/' + arrayData[1] + '/' + arrayData[0];
-}return(
+  return (
     <div>
-        <MenuSistema tela={'cliente'} />
-        <div style={{marginTop: '3%'}}>
+      <MenuSistema tela={'cliente'} />
+      <div style={{ marginTop: '3%' }}>
+        <Container textAlign='justified'>
+          <h2>Cliente</h2>
+          <Divider />
 
-            <Container textAlign='justified' >
+          <div style={{ marginTop: '4%' }}>
+            <Button
+              label='Novo'
+              circular
+              color='orange'
+              icon='clipboard outline'
+              floated='right'
+              as={Link}
+              to='/form-cliente'
+            />
+            <br /><br /><br />
 
-                <h2> Cliente </h2>
-                <Divider />
+            <Table color='orange' sortable celled>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Nome</Table.HeaderCell>
+                  <Table.HeaderCell>CPF</Table.HeaderCell>
+                  <Table.HeaderCell>Data de Nascimento</Table.HeaderCell>
+                  <Table.HeaderCell>Fone Celular</Table.HeaderCell>
+                  <Table.HeaderCell>Fone Fixo</Table.HeaderCell>
+                  <Table.HeaderCell textAlign='center'>Ações</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
 
-                <div style={{marginTop: '4%'}}>
-                    <Button
-                        label='Novo'//
+              <Table.Body>
+                {lista.map(cliente => (
+                  <Table.Row key={cliente.id}>
+                    <Table.Cell>{cliente.nome}</Table.Cell>
+                    <Table.Cell>{cliente.cpf}</Table.Cell>
+                    <Table.Cell>{formatarData(cliente.dataNascimento)}</Table.Cell>
+                    <Table.Cell>{cliente.foneCelular}</Table.Cell>
+                    <Table.Cell>{cliente.foneFixo}</Table.Cell>
+                    <Table.Cell textAlign='center'>
+                      <Button
+                        inverted
                         circular
-                        color='orange'
-                        icon='clipboard outline'
-                        floated='right'
+                        color='green'
+                        title='Editar cliente'
+                        icon
                         as={Link}
-                       to='/form-cliente'//da tela listagem entre na tela cliente
-
-                        />
-                        <br/><br/><br/>
-                  
-                        <Table color='orange' sortable celled>
- 
-                            <Table.Header>
-                                <Table.Row>
-                                    <Table.HeaderCell>Nome</Table.HeaderCell>
-                                    <Table.HeaderCell>CPF</Table.HeaderCell>
-                                    <Table.HeaderCell>Data de Nascimento</Table.HeaderCell>
-                                    <Table.HeaderCell>Fone Celular</Table.HeaderCell>
-                                    <Table.HeaderCell>Fone Fixo</Table.HeaderCell>
-                                    <Table.HeaderCell textAlign='center'>Ações</Table.HeaderCell>
-                                </Table.Row>
-                            </Table.Header>
-                       
-                            <Table.Body>//e um form 
- 
-                                { lista.map(cliente => (
- 
-                                    <Table.Row key={cliente.id}>
-                                        <Table.Cell>{cliente.nome}</Table.Cell>
-                                        <Table.Cell>{cliente.cpf}</Table.Cell>
-
-                                        <Table.Cell>{formatarData(cliente.dataNascimento)}</Table.Cell>//Na data ele traz no formato americano
-
-                                        <Table.Cell>{cliente.foneCelular}</Table.Cell>
-                                        <Table.Cell>{cliente.foneFixo}</Table.Cell>
-                                        <Table.Cell textAlign='center'>
- 
-                                             <Button
-                                                inverted
-                                                circular
-                                                color='green'
-                                                title='Clique aqui para editar os dados deste cliente'
-                                                icon>
-                                                    onClick={e => confirmaRemover(cliente.id)}
-                                                    <Link to="/form-cliente" state={{id: cliente.id}} style={{color: 'green'}}> <Icon name='edit' /> </Link>
-                                            </Button>
-;
-                                            <Button
-                                               inverted
-                                               circular
-                                               color='red'
-                                               title='Clique aqui para remover este cliente'
-                                               icon>
-                                                onClick={e => confirmaRemover(cliente.id)}
-
-                                                <Link to="/form-cliente" state={{id: cliente.id}} style={{color: 'green'}}> <Icon name='edit' /> </Link>
-
-                                                   <Icon name='trash' />
-                                           </Button>
-
-                                       </Table.Cell>
-                                   </Table.Row>
-                               ))}
-
-                           </Table.Body>
-                       </Table>
-                   </div>
-               </Container>
-           </div>
-                <Modal
-                    basic
-                    onClose={() => setOpenModal(false)}
-                    onOpen={() => setOpenModal(true)}
-                    open={openModal}
-                >
-                    <Header icon>
+                        to="/form-cliente"
+                        state={{ id: cliente.id }}
+                      >
+                        <Icon name='edit' />
+                      </Button>
+                      &nbsp;
+                      <Button
+                        inverted
+                        circular
+                        color='red'
+                        title='Remover cliente'
+                        icon
+                        onClick={() => confirmaRemover(cliente.id)}
+                      >
                         <Icon name='trash' />
-                        <div style={{marginTop: '5%'}}> Tem certeza que deseja remover esse registro? </div>
-                    </Header>
-                    <Modal.Actions>
-                        <Button basic color='red' inverted onClick={() => setOpenModal(false)}>
-                            <Icon name='remove' /> Não
-                        </Button>
-                        <Button color='green' inverted onClick={() => remover()}>
-                            <Icon name='checkmark' /> Sim
-                        </Button>
-                    </Modal.Actions>
-                </Modal>
+                      </Button>
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table>
+          </div>
+        </Container>
+      </div>
 
-            
-
-       </div>
-   )
-
+      <Modal
+        basic
+        onClose={() => setOpenModal(false)}
+        onOpen={() => setOpenModal(true)}
+        open={openModal}
+      >
+        <Header icon>
+          <Icon name='trash' />
+          <div style={{ marginTop: '5%' }}>Tem certeza que deseja remover esse registro?</div>
+        </Header>
+        <Modal.Actions>
+          <Button basic color='red' inverted onClick={() => setOpenModal(false)}>
+            <Icon name='remove' /> Não
+          </Button>
+          <Button color='green' inverted onClick={remover}>
+            <Icon name='checkmark' /> Sim
+          </Button>
+        </Modal.Actions>
+      </Modal>
+    </div>
+  );
 }
