@@ -31,11 +31,11 @@ export default function FormEntregador() {
     { key: 'SP', value: 'SP', text: 'São Paulo' },
     { key: 'RJ', value: 'RJ', text: 'Rio de Janeiro' },
     { key: 'MG', value: 'MG', text: 'Minas Gerais' },
-    // Adicione mais conforme necessário
+    
   ];
 
   useEffect(() => {
-    // Simulação de carregamento de dados do entregador
+  
     const fetchEntregador = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/entregador/1");
