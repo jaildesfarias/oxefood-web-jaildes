@@ -1,0 +1,10 @@
+//   @DeleteMapping("/{id}")
+   // public ResponseEntity<Void> remover(@PathVariable Long id) {
+  //      try {
+       //     clienteService.remover(id);
+         //   return ResponseEntity.noContent().build();
+        } //catch (ClienteNaoEncontradaException e) {
+            //return ResponseEntity.notFound().build();
+     //   }
+  //  }
+//}
