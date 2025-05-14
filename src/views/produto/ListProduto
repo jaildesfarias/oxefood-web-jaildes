@@ -1,22 +1,26 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Divider, Icon, Modal, Header, Table } from 'semantic-ui-react';
-import MenuSistema from '../../MenuSistema';
 import { Link } from "react-router-dom";
+import MenuSistema from '../../MenuSistema';
 
 export default function ListProduto() {
-  const [lista, setLista] = useState([]);
+  const [produtos, setProdutos] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [idRemover, setIdRemover] = useState(null);
 
   useEffect(() => {
-    carregarLista();
+    carregarProdutos();
   }, []);
 
-  function carregarLista() {
+  function carregarProdutos() {
     axios.get("http://localhost:8080/api/produto")
-      .then((response) => setLista(response.data))
-      .catch((error) => console.log("Erro ao carregar lista de produtos", error));
+      .then((response) => {
+        setProdutos(response.data);
+      })
+      .catch((error) => {
+        console.log("Erro ao carregar produtos", error);
+      });
   }
 
   function confirmaRemover(id) {
@@ -28,9 +32,11 @@ export default function ListProduto() {
     axios.delete(`http://localhost:8080/api/produto/${idRemover}`)
       .then(() => {
         setOpenModal(false);
-        carregarLista();
+        carregarProdutos();
       })
-      .catch((error) => console.log("Erro ao remover produto", error));
+      .catch((error) => {
+        console.log("Erro ao remover produto", error);
+      });
   }
 
   return (
@@ -38,7 +44,13 @@ export default function ListProduto() {
       <MenuSistema tela={'produto'} />
       <div style={{ marginTop: '3%' }}>
         <Container textAlign='justified'>
-          <h2>Produto</h2>
+          <h2>
+            <span style={{ color: 'darkgray' }}>
+              Produto &nbsp;<Icon name='angle double right' size="small" />
+            </span>
+            Listagem
+          </h2>
+
           <Divider />
 
           <div style={{ marginTop: '4%' }}>
@@ -46,7 +58,7 @@ export default function ListProduto() {
               label='Novo'
               circular
               color='orange'
-              icon='plus'
+              icon='clipboard outline'
               floated='right'
               as={Link}
               to='/form-produto'
@@ -61,40 +73,28 @@ export default function ListProduto() {
                   <Table.HeaderCell>Título</Table.HeaderCell>
                   <Table.HeaderCell>Código</Table.HeaderCell>
                   <Table.HeaderCell>Valor Unitário</Table.HeaderCell>
+                  <Table.HeaderCell>Tempo Entrega (min)</Table.HeaderCell>
                   <Table.HeaderCell textAlign='center'>Ações</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
 
               <Table.Body>
-                {lista.map(produto => (
+                {produtos.map(produto => (
                   <Table.Row key={produto.id}>
                     <Table.Cell>{produto.empresa}</Table.Cell>
                     <Table.Cell>{produto.categoria}</Table.Cell>
                     <Table.Cell>{produto.titulo}</Table.Cell>
                     <Table.Cell>{produto.codigo}</Table.Cell>
-                    <Table.Cell>R$ {Number(produto.valorUnitario).toFixed(2)}</Table.Cell>
+                    <Table.Cell>R$ {parseFloat(produto.valorUnitario).toFixed(2)}</Table.Cell>
+                    <Table.Cell>{produto.tempoEntregaMinimo} - {produto.tempoEntregaMaximo}</Table.Cell>
                     <Table.Cell textAlign='center'>
-                      <Button
-                        inverted
-                        circular
-                        color='green'
-                        title='Editar produto'
-                        icon
-                        as={Link}
-                        to="/form-produto"
-                        state={{ id: produto.id }}
-                      >
-                        <Icon name='edit' />
-                      </Button>
-                      &nbsp;
-                      <Button
-                        inverted
-                        circular
-                        color='red'
-                        title='Remover produto'
-                        icon
-                        onClick={() => confirmaRemover(produto.id)}
-                      >
+                      <Button inverted circular color='green' icon title='Editar'>
+                        <Link to="/form-produto" state={{ id: produto.id }} style={{ color: 'green' }}>
+                          <Icon name='edit' />
+                        </Link>
+                      </Button> &nbsp;
+
+                      <Button inverted circular color='red' icon title='Remover' onClick={() => confirmaRemover(produto.id)}>
                         <Icon name='trash' />
                       </Button>
                     </Table.Cell>
