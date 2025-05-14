@@ -51,7 +51,17 @@ export default function ListCliente() {
       <MenuSistema tela={'cliente'} />
       <div style={{ marginTop: '3%' }}>
         <Container textAlign='justified'>
-          <h2>Cliente</h2>
+         
+       if (idCliente != null) { //Alteração:
+           axios.put("http://localhost:8080/api/cliente/" + idCliente, clienteRequest)
+           .then((response) => { console.log('Cliente alterado com sucesso.') })
+           .catch((error) => { console.log('Erro ao alter um cliente.') })
+       } else { //Cadastro:
+           axios.post("http://localhost:8080/api/cliente", clienteRequest)
+           .then((response) => { console.log('Cliente cadastrado com sucesso.') })
+           .catch((error) => { console.log('Erro ao incluir o cliente.') })
+       }
+
           <Divider />
 
           <div style={{ marginTop: '4%' }}>
@@ -87,27 +97,25 @@ export default function ListCliente() {
                     <Table.Cell>{cliente.foneCelular}</Table.Cell>
                     <Table.Cell>{cliente.foneFixo}</Table.Cell>
                     <Table.Cell textAlign='center'>
-                      <Button
-                        inverted
-                        circular
-                        color='green'
-                        title='Editar cliente'
-                        icon
-                        as={Link}
-                        to="/form-cliente"
-                        state={{ id: cliente.id }}
-                      >
-                        <Icon name='edit' />
-                      </Button>
-                      &nbsp;
+                                                                                    
+                        <Button
+                          inverted
+                          circular
+                          color='green'
+                          title='Clique aqui para editar os dados deste cliente'
+                          icon>
+                              <Link to="/form-cliente" state={{id: cliente.id}} style={{color: 'green'}}> <Icon name='edit' /> </Link>
+                      </Button> &nbsp;
+                     
                       <Button
                         inverted
                         circular
                         color='red'
                         title='Remover cliente'
-                        icon
-                        onClick={() => confirmaRemover(cliente.id)}
-                      >
+                        icon>
+                          <Link to="/form-cliente" state={{id: cliente.id}} style={{color: 'green'}}> <Icon name='edit' /> </Link>
+                              onClick={() => confirmaRemover(cliente.id)}
+                      
                         <Icon name='trash' />
                       </Button>
                     </Table.Cell>
