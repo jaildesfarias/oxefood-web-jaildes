@@ -21,7 +21,10 @@ export default function FormCumpoDesconto() {
     const [inicioVigencia, setInicioVigencia] = useState();
 
     useEffect(() => {
+        
+
         if (state != null && state.id != null) {
+
             axios.get("http://localhost:8080/api/cumpoDesconto/" + state.id)
             .then((response) => {
                            setCodigoDesconto(response.data.codigoDesconto)
