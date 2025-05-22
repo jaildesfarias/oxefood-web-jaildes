@@ -1,9 +1,9 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { Button, Container, Divider, Form, Icon, Modal, Header } from 'semantic-ui-react';
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Button, Container, Divider, Form, Header, Icon, Modal } from 'semantic-ui-react';
 import '../../App.css';
 import MenuSistema from '../../MenuSistema';
-import { Link, useLocation } from "react-router-dom";
 
 export default function FormProduto() {
   const [idProduto, setIdProduto] = useState();
@@ -129,6 +129,19 @@ export default function FormProduto() {
                 value={descricao}
                 onChange={e => setDescricao(e.target.value)}
               />
+              <Form.Select
+                    required
+                    fluid
+                    tabIndex='3'
+                    placeholder='Selecione'
+                    label='Categoria'
+                    options={listaCategoria}
+                    value={idCategoria}
+                    onChange={(e,{value}) => {
+                      setIdCategoria(value)
+                    }}
+                  />
+
 
               <Form.Group widths='equal'>
                 <Form.Input
