@@ -29,6 +29,7 @@ function Rotas() {
             <Route path="form-entregador" element={<FormEntregador />} />
             <Route path="list-entregador" element={<ListEntregador />} />
             <Route path="detalhe-entregador/:id" element={<DetalheEntregador />} />
+            
         </Routes>
     );
 }
