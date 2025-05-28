@@ -113,6 +113,7 @@ export default function FormEnderecoCliente() {
                                         value={bairro}
                                         onChange={e => setBairro(e.target.value)}
                                     />
+                                    
                                 </Form.Input>
                                 <Form.Input required fluid label='CEP' width={6}>
                                     <InputMask
