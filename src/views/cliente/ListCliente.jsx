@@ -164,5 +164,5 @@ export default function ListCliente() {
         </Modal.Actions>
       </Modal>
     </div>
-  );
+  )
 }
