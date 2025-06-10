@@ -1,17 +1,18 @@
 import axios from 'axios';
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Container, Divider, Header, Icon, Modal, Table } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
-export default function ListEntregador() {
+export default function ListProduto() {
 
     const [lista, setLista] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [idRemover, setIdRemover] = useState();
+ 
     useEffect(() => {
         carregarLista();
-    }, []);
+    }, [])
 
     function confirmaRemover(id) {
         setOpenModal(true)
@@ -19,51 +20,39 @@ export default function ListEntregador() {
     } 
 
     function carregarLista() {
-        axios.get("http://localhost:8080/api/entregador")
+
+        axios.get("http://localhost:8080/api/produto")
             .then((response) => {
-                setLista(response.data);
-            });
-    }
-  function formatarData(dataParam) {
-    if (!dataParam) { 
-      return "";
+                setLista(response.data)
+            })
     }
 
-    let arrayData = String(dataParam).split("/"); 
-    
-    if (arrayData.length === 3) {
-      return `${arrayData[0]}/${arrayData[1]}/${arrayData[2]}`;
-    } else {
-      
-      console.warn("Formato de data inesperado, retornando string original:", dataParam);
-      return String(dataParam); 
-    }
-  }
     async function remover() {
 
-        await axios.delete('http://localhost:8080/api/entregador/' + idRemover)
+        await axios.delete('http://localhost:8080/api/produto/' + idRemover)
         .then((response) => {
   
-            console.log('Entregador removido com sucesso.')
+            console.log('Produto removido com sucesso.')
   
-            axios.get("http://localhost:8080/api/entregador")
+            axios.get("http://localhost:8080/api/produto")
             .then((response) => {
                 setLista(response.data)
             })
         })
         .catch((error) => {
-            console.log('Erro ao remover um entregador.')
+            console.log('Erro ao remover um produto.')
         })
         setOpenModal(false)
-    }
- 
+    } 
+
     return (
         <div>
-            <MenuSistema tela={'entregador'} />
+            <MenuSistema tela={'produto'} />
             <div style={{ marginTop: '3%' }}>
-                <Container textAlign='justified'>
 
-                    <h2>Entregador</h2>
+                <Container textAlign='justified' >
+
+                    <h2> Produto </h2>
                     <Divider />
 
                     <div style={{ marginTop: '4%' }}>
@@ -74,7 +63,7 @@ export default function ListEntregador() {
                             icon='clipboard outline'
                             floated='right'
                             as={Link}
-                            to='/form-entregador'
+                            to='/form-produto'
                         />
                         <br /><br /><br />
 
@@ -82,58 +71,59 @@ export default function ListEntregador() {
 
                             <Table.Header>
                                 <Table.Row>
-                                    <Table.HeaderCell>Nome</Table.HeaderCell>
-                                    <Table.HeaderCell>CPF</Table.HeaderCell>
-                                    <Table.HeaderCell>RG</Table.HeaderCell>
-                                    <Table.HeaderCell>Data de Nascimento</Table.HeaderCell>
-                                    <Table.HeaderCell>Fone Celular</Table.HeaderCell>
-                                    <Table.HeaderCell>Fone Fixo</Table.HeaderCell>
-                                    <Table.HeaderCell>Quantidade de Entregas Realizadas</Table.HeaderCell>
-                                    <Table.HeaderCell>Valor Frete</Table.HeaderCell>
+                                    <Table.HeaderCell>Codigo</Table.HeaderCell>
+                                    <Table.HeaderCell>Categoria</Table.HeaderCell>
+                                    <Table.HeaderCell>Título</Table.HeaderCell>
+                                    <Table.HeaderCell>Descrição</Table.HeaderCell>
+                                    <Table.HeaderCell>Valor Unitário</Table.HeaderCell>
+                                    <Table.HeaderCell>Tempo de Entrega Mínimo</Table.HeaderCell>
+                                    <Table.HeaderCell>Tempo de Entrega Máximo</Table.HeaderCell>
                                     <Table.HeaderCell textAlign='center'>Ações</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
 
                             <Table.Body>
-                                {lista && lista.map(entregador => (
-                                    <Table.Row key={entregador.id}>
-                                        <Table.Cell>{entregador.nome}</Table.Cell>
-                                        <Table.Cell>{entregador.cpf}</Table.Cell>
-                                        <Table.Cell>{entregador.rg}</Table.Cell>
-                                        <Table.Cell>{formatarData(entregador.dataNascimento)}</Table.Cell>
-                                        <Table.Cell>{entregador.foneCelular}</Table.Cell>
-                                        <Table.Cell>{entregador.foneFixo}</Table.Cell>
-                                        <Table.Cell>{entregador.qtdEntregasRealizadas}</Table.Cell>
-                                        <Table.Cell>{entregador.valorFrete}</Table.Cell>
-                                        <Table.Cell textAlign='center'>
-                                            <Button
 
+                                {lista.map(produto => (
+
+                                    <Table.Row key={produto.id}>
+                                        <Table.Cell>{produto.codigo}</Table.Cell>
+                                        <Table.Cell>{produto.categoria.descricao}</Table.Cell>
+                                        <Table.Cell>{produto.titulo}</Table.Cell>
+                                        <Table.Cell>{produto.descricao}</Table.Cell>
+                                        <Table.Cell>{produto.valorUnitario}</Table.Cell>
+                                        <Table.Cell>{produto.tempoEntregaMinimo}</Table.Cell>
+                                        <Table.Cell>{produto.tempoEntregaMaximo}</Table.Cell>
+                                        <Table.Cell textAlign='center'>
+
+                                            <Button
+                                                inverted
                                                 circular
                                                 color='green'
-                                                title='Clique aqui para editar os dados deste cliente'
+                                                title='Clique aqui para editar os dados deste produto'
                                                 icon>
-                                                <Link to="/form-entregador" state={{ id: entregador.id }} style={{ color: 'green' }}> <Icon name='edit' /> </Link>
-                                            </Button>
-
-                                            &nbsp;
+                                                <Link to="/form-produto" state={{ id: produto.id }} style={{ color: 'green' }}> <Icon name='edit' /> </Link>
+                                            </Button>  &nbsp;
                                             <Button
                                                 inverted
                                                 circular
                                                 color='red'
-                                                title='Clique aqui para remover este entregador'
+                                                title='Clique aqui para remover este produto'
                                                 icon
-                                                onClick={e => confirmaRemover(entregador.id)}>
+                                                onClick={e => confirmaRemover(produto.id)}>
                                                 <Icon name='trash' />
                                             </Button>
 
                                         </Table.Cell>
                                     </Table.Row>
                                 ))}
+
                             </Table.Body>
                         </Table>
                     </div>
                 </Container>
             </div>
+
             <Modal
                basic
                onClose={() => setOpenModal(false)}
@@ -153,6 +143,7 @@ export default function ListEntregador() {
                    </Button>
                </Modal.Actions>
          </Modal>
+
         </div>
-    );
+    )
 }
