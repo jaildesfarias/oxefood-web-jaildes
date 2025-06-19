@@ -1,18 +1,14 @@
-import React from 'react';
 import { Route, Routes } from "react-router-dom";
 
 // Importações dos componentes
-import Home from './views/home/Home';
 import FormCliente from './views/cliente/FormCliente';
 import ListCliente from './views/cliente/ListCliente';
+import Home from './views/home/Home';
 
 import FormProduto from './views/produto/FormProduto';
 import ListProduto from './views/produto/ListProduto';
 
-
 import FormEntregador from './views/entregador/FormEntregador';
-
-
 
 import ListEntregador from './views/entregador/ListEntregador';
 import DetalheEntregador from './views/home/DetalheEntregador';

@@ -1,18 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
-import Home from './views/home/Home';
-import FormCliente from './views/cliente/FormCliente';
-import FormProduto from './views/produto/FormProduto';
-import FormEntregador from './views/entregador/FormEntregador';
 
-
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { Segment } from 'semantic-ui-react';
+
 import Rotas from './Rotas';
 
 
 function App() {
  return (
    <div className="App">
+     <ToastContainer />
        <Rotas />
 
      <div style={{marginTop: '6%'}}>
