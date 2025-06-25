@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import {
   Button,
   Container,
@@ -63,6 +64,20 @@ export default function ListCliente() {
       });
     setOpenModal(false);
   }
+        axios.post(ENDERECO_API + "api/cliente", clienteRequest)
+      .then((response) => {
+      notifySuccess('Cliente cadastrado com sucesso.')
+      })
+      .catch((error) => {
+      if (error.response.data.errors != undefined) {
+                for (let i = 0; i < error.response.data.errors.length; i++) {
+                  notifyError(error.response.data.errors[i].defaultMessage)
+              }
+        } else {
+          notifyError(error.response.data.message)
+        }
+      })
+
 
   return (
     <div>

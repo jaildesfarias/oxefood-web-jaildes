@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Container, Divider, Header, Icon, Modal, Table } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
-export default function ListCategoriaProduto() {
+export default function ListCupomDesconto() {
 
     const [lista, setLista] = useState([]);
     const [openModal, setOpenModal] = useState(false);
@@ -14,46 +14,54 @@ export default function ListCategoriaProduto() {
         carregarLista();
     }, [])
 
-    function confirmaRemover(id) { //Recebe o id do cliente
+    function confirmaRemover(id) { //Recebe o id do cupom
         setOpenModal(true) // Modifica a variavel open modal para true
         setIdRemover(id)
     }
 
     function carregarLista() {
 
-        axios.get("http://localhost:8080/api/categoriaProduto")
+        axios.get("http://localhost:8080/api/cupomDesconto")
             .then((response) => {
                 setLista(response.data)
             })
     }
-   
+    function formatarData(dataParam) {
+
+        if (dataParam === null || dataParam === '' || dataParam === undefined) {
+            return ''
+        }
+
+        let arrayData = dataParam.split('-');
+        return arrayData[2] + '/' + arrayData[1] + '/' + arrayData[0];
+    }
 
     async function remover() {
 
-        await axios.delete('http://localhost:8080/api/categoriaProduto/' + idRemover)
+        await axios.delete('http://localhost:8080/api/cupomDesconto/' + idRemover)
         .then((response) => {
   
-            console.log('Categoria removida com sucesso.')
+            console.log('Cupom removido com sucesso.')
   
-            axios.get("http://localhost:8080/api/categoriaProduto")
+            axios.get("http://localhost:8080/api/cupomDesconto")
             .then((response) => {
                 setLista(response.data)
             })
         })
         .catch((error) => {
-            notifySuccess('Erro ao remover uma Categoria.')
+            console.log('Erro ao remover um cupom.')
         })
         setOpenModal(false)
     } 
 
     return (
         <div>
-            <MenuSistema tela={'categoriaproduto'} />
+            <MenuSistema tela={'cupomDesconto'} />
             <div style={{ marginTop: '3%' }}>
 
                 <Container textAlign='justified' >
 
-                    <h2> Categoria do Produto </h2>
+                    <h2> Cupom de Desconto </h2>
                     <Divider />
 
                     <div style={{ marginTop: '4%' }}>
@@ -64,7 +72,7 @@ export default function ListCategoriaProduto() {
                             icon='clipboard outline'
                             floated='right'
                             as={Link}
-                            to='/form-categoriaproduto'
+                            to='/form-cupomDesconto'
                         />
                         <br /><br /><br />
 
@@ -72,26 +80,38 @@ export default function ListCategoriaProduto() {
 
                             <Table.Header>
                                 <Table.Row>
-                                    <Table.HeaderCell>Descrição</Table.HeaderCell>
+                                    <Table.HeaderCell>Código</Table.HeaderCell>
+                                    <Table.HeaderCell>Percentual Desconto</Table.HeaderCell>
+                                    <Table.HeaderCell>Valor Desconto</Table.HeaderCell>
+                                    <Table.HeaderCell>Valor Mínimo Permitido para o Pedido</Table.HeaderCell>
+                                    <Table.HeaderCell>Quantidade Máxima de Uso por Cliente</Table.HeaderCell>
+                                    <Table.HeaderCell>Início da Vigência</Table.HeaderCell>
+                                    <Table.HeaderCell>Fim da Vigência</Table.HeaderCell>
                                     <Table.HeaderCell textAlign='center'>Ações</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
 
                             <Table.Body>
 
-                                {lista.map(categoriaProduto => (
+                                {lista.map(cupomDesconto => (
 
-                                    <Table.Row key={categoriaProduto.id}>
-                                        <Table.Cell>{categoriaProduto.descricao}</Table.Cell>
+                                    <Table.Row key={cupomDesconto.id}>
+                                        <Table.Cell>{cupomDesconto.codigoDesconto}</Table.Cell>
+                                        <Table.Cell>{cupomDesconto.percentualDesconto}</Table.Cell>
+                                        <Table.Cell>{cupomDesconto.valorDesconto}</Table.Cell>
+                                        <Table.Cell>{cupomDesconto.valorMinimoPedidoPermitido}</Table.Cell>
+                                        <Table.Cell>{cupomDesconto.quantidadeMaximaUso}</Table.Cell>
+                                        <Table.Cell>{formatarData(cupomDesconto.inicioVigencia)}</Table.Cell>
+                                        <Table.Cell>{formatarData(cupomDesconto.fimVigencia)}</Table.Cell>
                                         <Table.Cell textAlign='center'>
 
                                             <Button
                                                 inverted
                                                 circular
                                                 color='green'
-                                                title='Clique aqui para editar os dados desta Categoria'
+                                                title='Clique aqui para editar os dados deste cliente'
                                                 icon>
-                                                <Link to="/form-categoriaproduto" state={{ id: categoriaProduto.id }} style={{ color: 'green' }}> <Icon name='edit' /> </Link>
+                                                <Link to="/form-cupomDesconto" state={{ id: cupomDesconto.id }} style={{ color: 'green' }}> <Icon name='edit' /> </Link>
                                             </Button>
 
                                             &nbsp;
@@ -99,9 +119,9 @@ export default function ListCategoriaProduto() {
                                                 inverted
                                                 circular
                                                 color='red'
-                                                title='Clique aqui para remover esta categoria'
+                                                title='Clique aqui para remover este cupom'
                                                 icon
-                                                onClick={e => confirmaRemover(categoriaProduto.id)}>
+                                                onClick={e => confirmaRemover(cupomDesconto.id)}>
                                                 <Icon name='trash' />
                                             </Button>
 

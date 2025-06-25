@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "semantic-ui-react";
 
+
 export default function MenuSistema (props) {
 
    return(
@@ -39,6 +40,12 @@ export default function MenuSistema (props) {
                    active={props.tela === 'enderecoCliente'}
                    as={Link}
                    to='/form-enderecoCliente'
+               />
+                <Menu.Item
+                   content='CupomDesconto'
+                   active={props.tela === 'cupomDesconto'}
+                   as={Link}
+                   to='/form-cupomDesconto'
                />
 
            </Menu>
