@@ -3,7 +3,7 @@ import InputMask from "comigo-tech-react-input-mask";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from "semantic-ui-react";
-import MenuSistema from "../../MenuSistema";
+import MenuSistema from "../MenuSistema";
 
 
 import { notifyError, notifySuccess } from '../../views/util/Util';
@@ -48,7 +48,7 @@ export default function FormCliente() {
       axios
         .put(`http://localhost:8080/api/cliente/${idCliente}`, clienteRequest)
         .then(() => {
-          console.log("Cliente alterado com sucesso.");
+         notifySuccess("Cliente salvo com sucesso!");
           navigate("/list-cliente");
         })
         .catch(() => {
@@ -61,7 +61,7 @@ export default function FormCliente() {
         .post("http://localhost:8080/api/cliente", clienteRequest)
         .then((response) => {
           const id = response.data.id;
-          console.log("Cliente cadastrado com sucesso. ID:", id);
+          notifyError("Erro ao salvar cliente.");
         })
         .catch((error) => {
           notifySuccess("Erro ao incluir o cliente:", error);

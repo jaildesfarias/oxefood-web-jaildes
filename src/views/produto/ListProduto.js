@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Container, Divider, Header, Icon, Modal, Table } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
-
+import { notifySuccess, notifyError } from '../../views/util/Util';
 export default function ListProduto() {
 
     const [lista, setLista] = useState([]);

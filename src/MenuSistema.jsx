@@ -5,6 +5,12 @@ import { Menu } from "semantic-ui-react";
 
 export default function MenuSistema (props) {
 
+    const MenuSistema = () => (
+  <div>
+    <h3>Menu do Sistema</h3>
+  </div>
+    );
+
    return(
        <>
            <Menu inverted>
@@ -35,18 +41,7 @@ export default function MenuSistema (props) {
                    as={Link}
                    to='/form-entregador'
                />
-               <Menu.Item
-                   content='Endereco Cliente'
-                   active={props.tela === 'enderecoCliente'}
-                   as={Link}
-                   to='/form-enderecoCliente'
-               />
-                <Menu.Item
-                   content='CupomDesconto'
-                   active={props.tela === 'cupomDesconto'}
-                   as={Link}
-                   to='/form-cupomDesconto'
-               />
+            
 
            </Menu>
        </>
