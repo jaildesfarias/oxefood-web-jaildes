@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "semantic-ui-react";
 
@@ -21,7 +20,7 @@ export default function MenuSistema (props) {
                    as={Link}
                    to='/list-cliente'
                />
-       <Menu.Item
+             <Menu.Item
                    content='Produto'
                    active={props.tela === 'produto'}
                    as={Link}

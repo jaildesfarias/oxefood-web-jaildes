@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button, Container, Divider, Icon, Table } from "semantic-ui-react";
 import MenuSistema from "../../MenuSistema";
 
-export default function ListProduto() {
+export default function ListCliente() {
   const [lista, setLista] = useState([]);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export default function ListProduto() {
   }, []);
 
   function carregarLista() {
-    axios.get("http://localhost:8080/api/produto").then((response) => {
+    axios.get("http://localhost:8080/api/cliente").then((response) => {
       setLista(response.data);
     });
   }
@@ -20,7 +20,7 @@ export default function ListProduto() {
 
   return (
     <div>
-      <MenuSistema tela={"produto"} />
+      <MenuSistema tela={"cliente"} />
 
       <div style={{ marginTop: "3%" }}>
         <Container textAlign="justified">
@@ -35,7 +35,7 @@ export default function ListProduto() {
               icon="clipboard outline"
               floated="right"
               as={Link}
-              to="/form-produto"
+              to="/form-cliente"
             />
             <br />
             <br />
@@ -71,7 +71,7 @@ export default function ListProduto() {
                         icon
                       >
                         <Link
-                          to="/form-produto"
+                          to="/form-cliente"
                           state={{ id: obj.id }}
                           style={{ color: "green" }}
                         >
@@ -84,7 +84,7 @@ export default function ListProduto() {
                         inverted
                         circular
                         color="red"
-                        title="Clique aqui para remover este produto"
+                        title="Clique aqui para remover este cliente"
                         icon
                       >
                         <Icon name="trash" />
