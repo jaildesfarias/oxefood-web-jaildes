@@ -1,7 +1,22 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import { Button, Container, Divider, Icon, Table } from "semantic-ui-react";
+=======
+import { notifySuccess, notifyError } from '../../views/util/Util';
+
+
+import {
+  Button,
+  Container,
+  Divider,
+  Header,
+  Icon,
+  Modal,
+  Table,
+} from "semantic-ui-react";
+>>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
 import MenuSistema from "../../MenuSistema";
 
 export default function ListCliente() {
@@ -16,7 +31,55 @@ export default function ListCliente() {
       setLista(response.data);
     });
   }
+<<<<<<< HEAD
   
+=======
+   function formatarData(dataParam) {
+    if (!dataParam) { 
+      return "";
+    }
+
+    let arrayData = String(dataParam).split("/"); 
+    
+    if (arrayData.length === 3) {
+      return `${arrayData[0]}/${arrayData[1]}/${arrayData[2]}`;
+    } else {
+      
+      console.warn("Formato de data inesperado, retornando string original:", dataParam);
+      return String(dataParam); 
+    }
+  }
+
+  async function remover() {
+    await axios
+      .delete("http://localhost:8080/api/cliente/" + idRemover)
+      .then((response) => {
+        console.log("Cliente removido com sucesso.");
+
+        axios.get("http://localhost:8080/api/cliente").then((response) => {
+          setLista(response.data);
+        });
+      })
+      .catch((error) => {
+        console.log("Erro ao remover um cliente.");
+      });
+    setOpenModal(false);
+  }
+        axios.post(ENDERECO_API + "api/cliente", clienteRequest)
+      .then((response) => {
+      notifySuccess('Cliente cadastrado com sucesso.')
+      })
+      .catch((error) => {
+      if (error.response.data.errors != undefined) {
+                for (let i = 0; i < error.response.data.errors.length; i++) {
+                  notifyError(error.response.data.errors[i].defaultMessage)
+              }
+        } else {
+          notifyError(error.response.data.message)
+        }
+      })
+
+
 
   return (
     <div>

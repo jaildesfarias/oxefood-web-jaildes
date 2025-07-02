@@ -2,8 +2,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
+<<<<<<< HEAD
 import MenuSistema from '../MenuSistema';
 import { notifyError, notifySuccess } from '../../views/util/Util';
+=======
+//import MenuSistema from '../MenuSistema';
+import React from 'react';
+import MenuSistema from '../../MenuSistema';
+import { notifySuccess, notifyError } from '../../views/util/Util';
+>>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
 
 export default function FormCategoriaProduto() {
 
@@ -37,7 +44,7 @@ export default function FormCategoriaProduto() {
         } else { //Cadastro:
             axios.post("http://localhost:8080/api/categoriaProduto", categoriaProdutoRequest)
                 .then((response) => { console.log('Categoria cadastrado com sucesso.') })
-                .catch((error) => { console.log('Erro ao incluir a categoria.') })
+                .catch((error) => { notifySuccess('Erro ao incluir a categoria.') })
         }
 
     }
@@ -56,7 +63,7 @@ export default function FormCategoriaProduto() {
                     {idCategoriaProduto === undefined &&
                         <h2> <span style={{ color: 'darkgray' }}> Categoria Produto &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro</h2>
                     }
-                    {idCategoriaProduto != undefined &&
+                    {idCategoriaProduto !== undefined &&
                         <h2> <span style={{ color: 'darkgray' }}> Categoria Produto &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
                     }
 

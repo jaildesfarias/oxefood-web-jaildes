@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Container, Divider, Header, Icon, Modal, Table } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
-
+import { notifySuccess, notifyError } from '../../views/util/Util';
 export default function ListCategoriaProduto() {
 
     const [lista, setLista] = useState([]);
@@ -41,7 +41,7 @@ export default function ListCategoriaProduto() {
             })
         })
         .catch((error) => {
-            console.log('Erro ao remover uma Categoria.')
+            notifySuccess('Erro ao remover uma Categoria.')
         })
         setOpenModal(false)
     } 

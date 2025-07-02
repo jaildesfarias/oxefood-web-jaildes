@@ -6,6 +6,8 @@ import { Button, Container, Divider, Form, FormGroup, FormRadio, Icon } from 'se
 import MenuSistema from '../../MenuSistema';
 import { notifyError, notifySuccess } from '../../views/util/Util';
 
+import { notifyError, notifySuccess } from '../../views/util/Util';
+
 export default function FormEntregador() {
 
     const [nome, setNome] = useState();

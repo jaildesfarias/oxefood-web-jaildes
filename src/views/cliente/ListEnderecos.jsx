@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button, Container, Divider, Header, Icon, Modal, Table } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
+import { notifySuccess, notifyError } from '../../views/util/Util';
 
 export default function ListEnderecos() {
     const location = useLocation();
     const navigate = useNavigate();
     const { id: clienteId } = location.state || {}; // Pega o id do cliente do state da navegação
 
-    // Removida a variável 'lista' não utilizada
     const [listaEnderecos, setListaEnderecos] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [idRemover, setIdRemover] = useState();
@@ -20,8 +20,6 @@ export default function ListEnderecos() {
             carregarEnderecosDoCliente(clienteId);
             carregarNomeDoCliente(clienteId);
         } else {
-            // Se não há clienteId, tenta carregar todos os endereços.
-            // VOCÊ DEVE CONFIRMAR ESTE ENDPOINT NO SEU BACKEND.
             carregarTodosEnderecos();
         }
     }, [clienteId]);
@@ -32,8 +30,7 @@ export default function ListEnderecos() {
     }
 
     function carregarTodosEnderecos() {
-        // ASSUMIR QUE ESTE É O ENDPOINT PARA TODOS OS ENDEREÇOS. CONFIRME NO BACKEND.
-        axios.get(`http://localhost:8080/api/endereco`) // Endpoint mais genérico para todos os endereços
+        axios.get(`http://localhost:8080/api/endereco`)
             .then((response) => {
                 setListaEnderecos(response.data);
             })
@@ -43,8 +40,7 @@ export default function ListEnderecos() {
     }
 
     function carregarEnderecosDoCliente(id) {
-        // ESTE ENDPOINT PARECE SER O MAIS PROVÁVEL PARA ENDEREÇOS DE UM CLIENTE. CONFIRME NO BACKEND.
-        axios.get(`http://localhost:8080/api/cliente/${id}/endereco`) // Mantido como está no seu código
+        axios.get(`http://localhost:8080/api/cliente/${id}/endereco`)
             .then((response) => {
                 setListaEnderecos(response.data);
             })
@@ -66,10 +62,9 @@ export default function ListEnderecos() {
 
     async function remover() {
         try {
-            // CORREÇÃO NA URL DO DELETE: Use template literal para incluir o ID
             await axios.delete(`http://localhost:8080/api/cliente/endereco/${idRemover}`);
             console.log('Endereço removido com sucesso.');
-            // Recarrega a lista de endereços após a remoção
+
             if (clienteId) {
                 carregarEnderecosDoCliente(clienteId);
             } else {
@@ -87,7 +82,9 @@ export default function ListEnderecos() {
             <MenuSistema tela={'endereco'} />
             <div style={{ marginTop: '3%' }}>
                 <Container textAlign='justified'>
-                    <h2> Endereços {nomeCliente && `de ${nomeCliente}`} </h2>
+                    <h2>
+                        Endereços {nomeCliente && `de ${nomeCliente}`} {clienteId && `(ID: ${clienteId})`}
+                    </h2>
                     <Divider />
 
                     <div style={{ marginTop: '4%' }}>
@@ -98,7 +95,8 @@ export default function ListEnderecos() {
                             icon='clipboard outline'
                             floated='right'
                             as={Link}
-                            // Passa o clienteId como parâmetro de query para o FormEnderecos
+                            // Para um NOVO endereço, ainda passamos via query parameter,
+                            // pois o FormEnderecos usa location.search para isso.
                             to={clienteId ? `/form-endereco?clienteId=${clienteId}` : '/form-endereco'}
                         />
                         <Link to={'/list-cliente'}>
@@ -145,8 +143,10 @@ export default function ListEnderecos() {
                                                     title='Clique aqui para editar os dados deste endereço'
                                                     icon
                                                 >
-                                                    {/* Passa o clienteId para o FormEnderecos via state ao editar */}
-                                                    <Link to={`/form-endereco/${endereco.id}`} state={{ clienteId: clienteId }} style={{ color: 'green' }}>
+                                                    {/* >>> MUDANÇA AQUI: Passa ID do Endereço e ClienteId via STATE <<< */}
+                                                    <Link to={`/form-endereco`} 
+                                                          state={{ idEndereco: endereco.id, clienteId: clienteId }} 
+                                                          style={{ color: 'green' }}>
                                                         <Icon name='edit' />
                                                     </Link>
                                                 </Button>

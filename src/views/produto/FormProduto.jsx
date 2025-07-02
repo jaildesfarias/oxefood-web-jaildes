@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from "semantic-ui-react";
 import MenuSistema from "../../MenuSistema";
-
+import { notifySuccess, notifyError } from '../../views/util/Util';
 export default function FormProduto() {
   const [titulo, setTitulo] = useState();
   const [codigo, setCodigo] = useState();
@@ -31,7 +31,7 @@ export default function FormProduto() {
            })
        }
 
-       axios.get("http://localhost:8080/api/categoriaProduto")
+       axios.get("http://localhost:8080/api/categoriaproduto")
        .then((response) => {
            const dropDownCategorias = response.data.map(c => ({ text: c.descricao, value: c.id }));
            setListaCategoria(dropDownCategorias);
