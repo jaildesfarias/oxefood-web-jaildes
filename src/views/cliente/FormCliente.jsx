@@ -3,8 +3,15 @@ import InputMask from "comigo-tech-react-input-mask";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from "semantic-ui-react";
+<<<<<<< HEAD
 import MenuSistema from "../../MenuSistema";
 import { notifyError, notifySuccess } from "../../views/util/Util";
+=======
+import MenuSistema from "../MenuSistema";
+
+
+import { notifyError, notifySuccess } from '../../views/util/Util';
+>>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
 
 export default function FormCliente() {
   const { state } = useLocation();
@@ -15,25 +22,33 @@ export default function FormCliente() {
   const [dataNascimento, setDataNascimento] = useState("");
   const [foneCelular, setFoneCelular] = useState("");
   const [foneFixo, setFoneFixo] = useState("");
+<<<<<<< HEAD
 
   const navigate = useNavigate();
 
   const [clienteCadastrado, setClienteCadastrado] = useState(false);
   const [idNovoCliente, setIdNovoCliente] = useState();
   const [mostrarPerguntaEndereco, setMostrarPerguntaEndereco] = useState(false);
+=======
+  const navigate = useNavigate();
+>>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
 
   useEffect(() => {
     if (state != null && state.id != null) {
       axios
-        .get("http://localhost:8080/api/cliente/" + state.id)
+        .get("http://localhost:3000/api/cliente/" + state.id)
         .then((response) => {
           setIdCliente(response.data.id);
           setNome(response.data.nome);
           setCpf(response.data.cpf);
+<<<<<<< HEAD
 
           // Backend já retorna dd/MM/yyyy? Usa direto
           setDataNascimento(response.data.dataNascimento);
 
+=======
+          setDataNascimento(response.data.dataNascimento);
+>>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
           setFoneCelular(response.data.foneCelular);
           setFoneFixo(response.data.foneFixo);
         });
@@ -44,7 +59,11 @@ export default function FormCliente() {
     let clienteRequest = {
       nome,
       cpf,
+<<<<<<< HEAD
       dataNascimento, // envia direto no formato dd/MM/yyyy
+=======
+      dataNascimento, 
+>>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
       foneCelular,
       foneFixo,
     };
@@ -53,6 +72,7 @@ export default function FormCliente() {
       // Alteração
       axios
         .put(`http://localhost:8080/api/cliente/${idCliente}`, clienteRequest)
+<<<<<<< HEAD
        .then((response) => {
           notifySuccess("Cliente alterado com sucesso.");
           const id = response.data.id;
@@ -70,6 +90,14 @@ export default function FormCliente() {
           } else {
             notifyError(error.response.data.message);
           }
+=======
+        .then(() => {
+         notifySuccess("Cliente salvo com sucesso!");
+          navigate("/list-cliente");
+        })
+        .catch(() => {
+          notifySuccess("Erro ao alterar um cliente.");
+>>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
         });
     } else {
       // Cadastro
@@ -77,6 +105,7 @@ export default function FormCliente() {
       axios
         .post("http://localhost:8080/api/cliente", clienteRequest)
         .then((response) => {
+<<<<<<< HEAD
           notifySuccess("Cliente cadastrado com sucesso.");
           const id = response.data.id;
           setIdNovoCliente(id);
@@ -94,6 +123,13 @@ export default function FormCliente() {
           } else {
             notifyError(error.response.data.message);
           }
+=======
+          const id = response.data.id;
+          notifyError("Erro ao salvar cliente.");
+        })
+        .catch((error) => {
+          notifySuccess("Erro ao incluir o cliente:", error);
+>>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
         });
     }
   }
@@ -185,6 +221,7 @@ export default function FormCliente() {
               >
                 <Icon name="save" /> Salvar
               </Button>
+<<<<<<< HEAD
             </div>
 
             {/* Pergunta se deseja cadastrar endereço */}
@@ -240,6 +277,10 @@ export default function FormCliente() {
                 />
               </div>
             )}
+=======
+            </div>           
+
+>>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
           </div>
         </Container>
       </div>

@@ -1,12 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { notifySuccess, notifyError } from '../../views/util/Util';
+
+
 import {
   Button,
   Container,
   Divider,
+<<<<<<< HEAD
   Icon,
   List,
+=======
+  Header,
+  Icon,
+>>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
   Modal,
   Table,
 } from "semantic-ui-react";
@@ -24,11 +32,21 @@ export default function ListCliente() {
     carregarLista();
   }, []);
 
+<<<<<<< HEAD
+=======
+  function confirmaRemover(id) {
+    //Recebe o id do cliente
+    setOpenModal(true); // Modifica a variavel open modal para true
+    setIdRemover(id);
+  }
+
+>>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
   function carregarLista() {
     axios.get("http://localhost:8080/api/cliente").then((response) => {
       setLista(response.data);
     });
   }
+<<<<<<< HEAD
 
   function carregarEnderecos(idCliente) {
     axios
@@ -57,6 +75,24 @@ export default function ListCliente() {
     setIdRemover(id);
   }
 
+=======
+   function formatarData(dataParam) {
+    if (!dataParam) { 
+      return "";
+    }
+
+    let arrayData = String(dataParam).split("/"); 
+    
+    if (arrayData.length === 3) {
+      return `${arrayData[0]}/${arrayData[1]}/${arrayData[2]}`;
+    } else {
+      
+      console.warn("Formato de data inesperado, retornando string original:", dataParam);
+      return String(dataParam); 
+    }
+  }
+
+>>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
   async function remover() {
     await axios
       .delete("http://localhost:8080/api/cliente/" + idRemover)
@@ -68,6 +104,20 @@ export default function ListCliente() {
       });
     setOpenModal(false);
   }
+        axios.post(ENDERECO_API + "api/cliente", clienteRequest)
+      .then((response) => {
+      notifySuccess('Cliente cadastrado com sucesso.')
+      })
+      .catch((error) => {
+      if (error.response.data.errors != undefined) {
+                for (let i = 0; i < error.response.data.errors.length; i++) {
+                  notifyError(error.response.data.errors[i].defaultMessage)
+              }
+        } else {
+          notifyError(error.response.data.message)
+        }
+      })
+
 
   function formatarData(dataParam) {
     if (!dataParam) return "";
@@ -97,7 +147,12 @@ export default function ListCliente() {
             <br />
             <br />
             <br />
+<<<<<<< HEAD
             <Table textAlign="center" color="orange" sortable celled>
+=======
+
+            <Table color="orange" sortable celled>
+>>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>Nome</Table.HeaderCell>
@@ -154,6 +209,23 @@ export default function ListCliente() {
                         onClick={() => confirmaRemover(cliente.id)}
                       >
                         <Icon name="trash" />
+                      </Button>
+                      <br></br>
+                      <Button
+                        inverted
+                        circular
+                        color="blue"
+                        title="Clique aqui para ver os Endereços deste cliente"
+                        icon
+                      >
+                        <Link
+                          to="/list-endereco"
+                          state={{ id: cliente.id }}
+                          style={{ color: "blue" }}
+                        >
+                          {" "}
+                          <Icon name="home" />{" "}
+                        </Link>
                       </Button>
                     </Table.Cell>
                   </Table.Row>
