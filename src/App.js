@@ -1,6 +1,5 @@
 import './App.css';
-<<<<<<< HEAD
-=======
+
 import Home from './views/home/Home';
 import FormCliente from './views/cliente/FormCliente';
 import FormProduto from './views/produto/FormProduto';
@@ -9,7 +8,7 @@ import FormCategoriaProduto from './views/categoriaProduto/FormCategoriaProduto'
 
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
->>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
+
 
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";

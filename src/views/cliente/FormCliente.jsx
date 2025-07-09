@@ -1,34 +1,28 @@
 import axios from "axios";
-<<<<<<< HEAD
+
 import InputMask from 'comigo-tech-react-input-mask';
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
-=======
+
 import InputMask from "comigo-tech-react-input-mask";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from "semantic-ui-react";
 import MenuSistema from "../MenuSistema";
 
-
->>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
 import { notifyError, notifySuccess } from '../../views/util/Util';
 
-export default function FormCliente() {
-  const { state } = useLocation();
+export default function FormCliente(){
+  const {state } = useLocation();
   const [idCliente, setIdCliente] = useState();
-
-<<<<<<< HEAD
     const [nome, setNome] = useState();
     const [cpf, setCpf] = useState();
     const [dataNascimento, setDataNascimento] = useState();
     const [foneCelular, setFoneCelular] = useState();
     const [foneFixo, setFoneFixo] = useState();
-    const { state } = useLocation();
-    const [idCliente, setIdCliente] = useState();
-
+   
     useEffect(() => {
 
         if (state != null && state.id != null) { //Se o id estiver não entrará no if  não terá requisição
@@ -67,14 +61,14 @@ export default function FormCliente() {
                          notifyError(error.response.data.errors[i].defaultMessage)
                 .catch((error) => { console.log('Erro ao incluir o cliente.') })
         }
-=======
+
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
   const [foneCelular, setFoneCelular] = useState("");
   const [foneFixo, setFoneFixo] = useState("");
   const navigate = useNavigate();
->>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
+
 
   useEffect(() => {
     if (state != null && state.id != null) {
