@@ -1,59 +1,64 @@
 import axios from 'axios';
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Container, Divider, Header, Icon, Modal, Table } from 'semantic-ui-react';
+import { Button, Container, Divider, Icon, Table, Modal, Header } from 'semantic-ui-react';
+import { notifyError, notifySuccess } from '../../views/util/Util';
 import MenuSistema from '../../MenuSistema';
-import { notifySuccess, notifyError } from '../../views/util/Util';
+
 export default function ListCategoriaProduto() {
 
     const [lista, setLista] = useState([]);
-    const [openModal, setOpenModal] = useState(false);
     const [idRemover, setIdRemover] = useState();
+    const [openModal, setOpenModal] = useState();
 
     useEffect(() => {
         carregarLista();
     }, [])
 
-    function confirmaRemover(id) { //Recebe o id do cliente
-        setOpenModal(true) // Modifica a variavel open modal para true
+    function carregarLista() {
+
+        axios.get("http://localhost:8080/api/categoriaproduto")
+            .then((response) => {
+                setLista(response.data)
+            })
+    }
+
+    function confirmaRemover(id) {
+        setOpenModal(true)
         setIdRemover(id)
     }
 
-    function carregarLista() {
-
-        axios.get("http://localhost:8080/api/categoriaProduto")
-            .then((response) => {
-                setLista(response.data)
-            })
-    }
-   
-
     async function remover() {
 
-        await axios.delete('http://localhost:8080/api/categoriaProduto/' + idRemover)
+        await axios.delete('http://localhost:8080/api/categoriaproduto/' + idRemover)
         .then((response) => {
-  
-            console.log('Categoria removida com sucesso.')
-  
-            axios.get("http://localhost:8080/api/categoriaProduto")
+            notifySuccess('Categoria removida com sucesso.');
+            
+            axios.get("http://localhost:8080/api/categoriaproduto")
             .then((response) => {
-                setLista(response.data)
+                setLista(response.data);
             })
         })
         .catch((error) => {
-            notifySuccess('Erro ao remover uma Categoria.')
+            if (error.response.data.errors != undefined) {
+                for (let i = 0; i < error.response.data.errors.length; i++) {
+                notifyError(error.response.data.errors[i].defaultMessage)
+                    }
+                        } else {
+                        notifyError(error.response.data.message)
+                         }
         })
-        setOpenModal(false)
-    } 
+        setOpenModal(false);
+    }
 
     return (
         <div>
-            <MenuSistema tela={'categoriaproduto'} />
+            <MenuSistema tela={'categoriaProduto'} />
             <div style={{ marginTop: '3%' }}>
 
                 <Container textAlign='justified' >
 
-                    <h2> Categoria do Produto </h2>
+                    <h2> Categoria de Produto </h2>
                     <Divider />
 
                     <div style={{ marginTop: '4%' }}>
@@ -89,20 +94,21 @@ export default function ListCategoriaProduto() {
                                                 inverted
                                                 circular
                                                 color='green'
-                                                title='Clique aqui para editar os dados desta Categoria'
+                                                title='Clique aqui para editar os dados dessa categoria'
                                                 icon>
                                                 <Link to="/form-categoriaproduto" state={{ id: categoriaProduto.id }} style={{ color: 'green' }}> <Icon name='edit' /> </Link>
                                             </Button>
-
                                             &nbsp;
                                             <Button
                                                 inverted
                                                 circular
                                                 color='red'
-                                                title='Clique aqui para remover esta categoria'
+                                                title='Clique aqui para remover essa categoria'
                                                 icon
-                                                onClick={e => confirmaRemover(categoriaProduto.id)}>
+                                                onClick={e => confirmaRemover(categoriaProduto.id)}
+                                                >
                                                 <Icon name='trash' />
+
                                             </Button>
 
                                         </Table.Cell>
@@ -133,7 +139,6 @@ export default function ListCategoriaProduto() {
                     </Button>
                 </Modal.Actions>
             </Modal>
-
         </div>
     )
 }
