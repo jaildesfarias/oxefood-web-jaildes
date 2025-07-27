@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon, Dropdown } from 'semantic-ui-react';
-import { notifyError, notifySuccess } from '../../views/util/Util';
+import { notifyError, notifySuccess } from '../util/Util';
 import MenuSistema from '../../MenuSistema';
 
 export default function FormEnderecoCliente() {

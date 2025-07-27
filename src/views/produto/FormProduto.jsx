@@ -24,6 +24,8 @@ export default function FormProduto() {
   const [tempoEntregaMaximo, setTempoEntregaMaximo] = useState();
   const [listaCategoria, setListaCategoria] = useState([]);
   const [idCategoria, setIdCategoria] = useState();
+  	const [imagem, setImagem] = useState(null);
+  	const [preview, setPreview] = useState(null);
 
   useEffect(() => {
     if (state != null && state.id != null) {

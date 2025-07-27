@@ -1,55 +1,121 @@
+import React from "react";
 import { Route, Routes } from "react-router-dom";
-
-<<<<<<< HEAD
-// Importações dos componentes
-=======
-import FormCategoriaProduto from './views/categoriaProduto/FormCategoriaProduto';
-import ListCategoriaProduto from './views/categoriaProduto/ListCategoriaProduto';
->>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
-import FormCliente from './views/cliente/FormCliente';
-import ListCliente from './views/cliente/ListCliente';
-import Home from './views/home/Home';
-
-<<<<<<< HEAD
-=======
-import FormEntregador from './views/entregador/FormEntregador';
-import ListEntregador from './views/entregador/ListEntregador';
-import Home from './views/home/Home';
-import FormProduto from './views/produto/FormProduto';
->>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
-import ListProduto from './views/produto/ListProduto';
-import FormEnderecos from "./views/cliente/FormEnderecos";
-import ListEnderecos from "./views/cliente/ListEnderecos";
-
-<<<<<<< HEAD
-import FormEntregador from './views/entregador/FormEntregador';
-import FormProduto from  './views/produto/FormProduto';
-import ListEntregador from './views/entregador/ListEntregador';
-import DetalheEntregador from './views/home/DetalheEntregador';
+import ListCliente from "./views/cliente/ListCliente";
+import FormCliente from "./views/cliente/FormCliente";
+import ListEntregador from "./views/entregador/ListEntregador";
+import FormEntregador from "./views/entregador/FormEntregador";
+import ListProduto from "./views/produto/ListProduto";
+import FormProduto from "./views/produto/FormProduto";
+import ListCategoriaProduto from "./views/categoriaProduto/ListCategoriaProduto";
+import FormCategoriaProduto from "./views/categoriaProduto/FormCategoriaProduto";
+import FormEnderecoCliente from "./views/cliente/FormEnderecoCliente";
+import Home from "./views/home/Home";
+import FormLogin from "./views/login/FormLogin";
+import { ProtectedRoute } from "./views/util/ProtectedRoute";
+// import FormVenda from "./views/venda/FormVenda";
+// import ListVenda from "./views/venda/ListVenda";
 
 function Rotas() {
-=======
-function Rotas() { 
->>>>>>> 1433093612b1cdf2bc906d80acea2d75b7b2801d
-    return (
-        <>
-            <Routes>
-                <Route path="/" element={ <Home/> } /> 
-                <Route path="list-cliente" element={ <ListCliente/> } /> 
-                <Route path="list-produto" element={ <ListProduto/> } />
-                <Route path="list-entregador" element={ <ListEntregador/> } />
-              
-                <Route path="list-categoriaProduto" element={ <ListCategoriaProduto/> } />
-                <Route path="form-cliente" element={ <FormCliente/> } />
-                <Route path="form-produto" element={ <FormProduto/> } />
-                <Route path="form-entregador" element={ <FormEntregador/> } />
-             
-                <Route path="form-categoriaProduto" element={ <FormCategoriaProduto/> } />
-                <Route path="form-endereco" element={ <FormEnderecos/> } />
-                <Route path="list-endereco" element={ <ListEnderecos/> } />
-            </Routes>
-        </>
-    )
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<FormLogin />} />
+
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/list-cliente"
+          element={
+            <ProtectedRoute>
+              <ListCliente />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route 
+        path="list-produto" 
+        element={
+        <ProtectedRoute>
+          <ListProduto />
+          </ProtectedRoute>
+        }
+         />
+        
+        <Route 
+        path="list-entregador" 
+        element={
+        <ProtectedRoute>
+          <ListEntregador />
+        </ProtectedRoute>
+        }
+         />
+        
+        <Route
+          path="list-categoriaProduto"
+          element={
+          <ProtectedRoute>
+            <ListCategoriaProduto />
+          </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="form-categoriaProduto"
+          element={
+            <ProtectedRoute>
+              <FormCategoriaProduto />
+            </ProtectedRoute>
+            }
+        />
+
+        <Route 
+          path="form-cliente" 
+          element={
+            <ProtectedRoute>
+              <FormCliente />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route 
+          path="form-enderecoCliente" 
+          element={
+          <ProtectedRoute>
+            <FormEnderecoCliente />
+          </ProtectedRoute>
+          }
+           />
+
+        <Route 
+          path="form-produto" 
+          element={
+          <ProtectedRoute>
+            <FormProduto />
+          </ProtectedRoute>
+            }
+          />
+
+        <Route 
+          path="form-entregador" 
+          element={
+            <ProtectedRoute>
+              <FormEntregador />
+            </ProtectedRoute>
+            }
+          />
+
+        {/* <Route path="list-venda" element={ <ListVenda/> } />
+                <Route path="form-venda" element={ <FormVenda/> } /> */}
+      </Routes>
+    </>
+  );
 }
 
-export default Rotas
+export default Rotas;
